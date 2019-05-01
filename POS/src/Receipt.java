@@ -32,7 +32,7 @@ public class Receipt implements Serializable {
 		int n = rand.nextInt(1000000);
 		this.receiptId = n;
 		this.date = LocalDate.now();
-		this.receiptName = "" + regId + date;
+		this.receiptName = "" + regId + "-"+ date +"-"+ receiptId;
 	}
 	
 	public Receipt() {}
@@ -46,6 +46,41 @@ public class Receipt implements Serializable {
         return this.registerId;
     }
 	
+	@XmlElement(name = "UserId")
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+	
+	public int getUserId() {
+        return this.userId;
+    }
+	
+	@XmlElement(name = "ReceiptId")
+    public void setReceiptId(int recId) {
+        this.receiptId = recId;
+    }
+	
+	public int getReceiptId() {
+        return this.receiptId;
+    }
+	
+	@XmlElement(name = "Date")
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+	
+	public LocalDate getDate() {
+        return this.date;
+    }
+	
+	@XmlElement(name = "ReceiptName")
+    public void setReceiptName(String name) {
+        this.receiptName = name;
+    }
+	
+	public String getReceiptName() {
+        return this.receiptName;
+    }
 	
     @XmlElementWrapper(name = "items")
     @XmlElement(name = "product")
