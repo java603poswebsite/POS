@@ -21,9 +21,20 @@ public class ReadWriteXML<T> {
 		}
     }
 	
-	public void personToXMLExample(String filename, Object obj) throws Exception {  
+	public void ObjectToXML(String filename, Object obj) throws Exception {  
 	    File file = new File(filename);
 	    JAXBContext jaxbContext = JAXBContext.newInstance(Object.class);
+
+	    Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+	    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+	    jaxbMarshaller.marshal(obj, file);
+	    jaxbMarshaller.marshal(obj, System.out);
+	}
+	
+	public void receiptToXML(String filename, Receipt obj) throws Exception {  
+	    File file = new File(filename);
+	    JAXBContext jaxbContext = JAXBContext.newInstance(Receipt.class);
 
 	    Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 

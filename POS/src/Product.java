@@ -1,9 +1,14 @@
+import java.io.Serializable;
 import java.util.Random;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Product {
+public class Product implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String name = "";
 	long pIdent = 0;
 	long inventory = 0;
@@ -18,7 +23,7 @@ public class Product {
 		this.threshHold = thresh;
 	}
 	
-	
+	public Product() {}
 	
 	
 	
