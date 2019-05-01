@@ -43,5 +43,50 @@ public class ReadWriteXML<T> {
 	    jaxbMarshaller.marshal(obj, System.out);
 	}
 	
+	public void registerToXML(String filename, Register obj) throws Exception {  
+	    File file = new File(filename);
+	    JAXBContext jaxbContext = JAXBContext.newInstance(Register.class);
+
+	    Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+	    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+	    jaxbMarshaller.marshal(obj, file);
+	    jaxbMarshaller.marshal(obj, System.out);
+	}
+	
+	public void ProductMasterListToXML(String filename, ProductMasterList obj) throws Exception {  
+	    File file = new File(filename);
+	    JAXBContext jaxbContext = JAXBContext.newInstance(ProductMasterList.class);
+
+	    Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+	    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+	    jaxbMarshaller.marshal(obj, file);
+	    jaxbMarshaller.marshal(obj, System.out);
+	}
+	
+	
+	public void RegisterListToXML(String filename, RegisterList obj) throws Exception {  
+	    File file = new File(filename);
+	    JAXBContext jaxbContext = JAXBContext.newInstance(RegisterList.class);
+
+	    Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+	    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+	    jaxbMarshaller.marshal(obj, file);
+	    jaxbMarshaller.marshal(obj, System.out);
+	}
+	
+	public void UserListToXML(String filename, UserList obj) throws Exception {  
+	    File file = new File(filename);
+	    JAXBContext jaxbContext = JAXBContext.newInstance(UserList.class);
+
+	    Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+	    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+	    jaxbMarshaller.marshal(obj, file);
+	    jaxbMarshaller.marshal(obj, System.out);
+	}
+	
 	
 }
