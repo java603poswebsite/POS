@@ -6,7 +6,7 @@
             <Name>CannedFood</Name>
             <Price>2.5</Price>
             <Supplier>Minnesota</Supplier>
-            <Threshhold>0</Threshhold>
+            <Threshhold>2</Threshhold>
             <pIdent>429562</pIdent>
         </Product>
         <Product>
@@ -30,7 +30,7 @@
             <Name>PineApple</Name>
             <Price>10.0</Price>
             <Supplier>Hawaii</Supplier>
-            <Threshhold>0</Threshhold>
+            <Threshhold>5</Threshhold>
             <pIdent>471775</pIdent>
         </Product>
         <Product>
@@ -38,7 +38,7 @@
             <Name>Strawberry</Name>
             <Price>5.0</Price>
             <Supplier>California</Supplier>
-            <Threshhold>0</Threshhold>
+            <Threshhold>3</Threshhold>
             <pIdent>62949</pIdent>
         </Product>
     </Products>

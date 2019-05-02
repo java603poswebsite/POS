@@ -9,7 +9,7 @@ public class WriteReadDatabase {
 	public void writeReceipt(UserReceiptList r) {
 		Path currentRelativePath = Paths.get(""); 
 		String s = currentRelativePath.toAbsolutePath().toString();
-		File dir = new File(s+ "\\Database\\" + r.getDate() + "\\" + r.getRegisterId() + "\\" + r.getUserName()+"\\");
+		File dir = new File(s+ "\\Database\\" + r.getRegisterId() + "\\" + r.getDate() + "\\"  + r.getUserName()+"\\");
 	    boolean successful = dir.mkdirs();
 	    boolean exists = dir.exists();
 	    if (exists)
@@ -132,7 +132,7 @@ public class WriteReadDatabase {
 	public UserReceiptList ReadReceiptList (int registerId, String date, String userName) throws Exception {
 		Path currentRelativePath = Paths.get(""); 
 		String s = currentRelativePath.toAbsolutePath().toString();
-		File file = new File(s+ "\\Database\\" + date + "\\" + registerId + "\\" + userName +"\\" +date + userName + ".xml");
+		File file = new File(s+ "\\Database\\" + registerId + "\\" + date + "\\" + userName +"\\" +date + userName + ".xml");
         JAXBContext jaxbContext = JAXBContext.newInstance(UserReceiptList.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
