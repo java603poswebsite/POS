@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<receipt>
+    <Date/>
+    <items>
+        <product>
+            <Inventory>10</Inventory>
+            <Name>PineApple</Name>
+            <Price>10.0</Price>
+            <Supplier>Hawaii</Supplier>
+            <Threshhold>1</Threshhold>
+            <pIdent>873271</pIdent>
+        </product>
+        <product>
+            <Inventory>10</Inventory>
+            <Name>Strawberry</Name>
+            <Price>5.0</Price>
+            <Supplier>California</Supplier>
+            <Threshhold>1</Threshhold>
+            <pIdent>421046</pIdent>
+        </product>
+        <product>
+            <Inventory>10</Inventory>
+            <Name>CannedFood</Name>
+            <Price>2.5</Price>
+            <Supplier>Minnesota</Supplier>
+            <Threshhold>1</Threshhold>
+            <pIdent>490162</pIdent>
+        </product>
+    </items>
+    <ReceiptId>102413</ReceiptId>
+    <ReceiptName>1-2019-05-01-102413</ReceiptName>
+    <RegisterId>1</RegisterId>
+    <UserId>1</UserId>
+</receipt>

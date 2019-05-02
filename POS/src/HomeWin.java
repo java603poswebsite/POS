@@ -169,7 +169,6 @@ public class HomeWin extends Gui {
 		
 		URL urlmango = getClass().getResource("Mango.jpg");
 		btnMangos.setIcon(new ImageIcon(urlmango.getPath()));
-		
 		JButton btnBananas = new JButton("");
 		URL urlbananas = getClass().getResource("bananas.jpg");
 		

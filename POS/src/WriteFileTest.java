@@ -1,3 +1,7 @@
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.File;
 
 public class WriteFileTest {
 
@@ -11,6 +15,12 @@ public class WriteFileTest {
 		receipt.addReceiptItem(pineapple);
 		receipt.addReceiptItem(Strawberry);
 		receipt.addReceiptItem(CannedFood);
+		//URL urlmango = Object.class.getClass().getResource("Mango.jpg");
+		//System.out.println("File Path = " + urlmango.getPath());
+		
+		//Path currentRelativePath = Paths.get(""); 
+		//String s = currentRelativePath.toAbsolutePath().toString(); 
+		//System.out.println("Current relative path is: " + s);
 		
 		WriteReceipt wr = new WriteReceipt();
 		wr.writeReceipt(receipt);
