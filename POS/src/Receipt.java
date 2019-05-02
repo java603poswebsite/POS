@@ -18,7 +18,7 @@ public class Receipt implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private LocalDate date = null;
+	private String date = null;
 	private int registerId = 0;
 	private int userId = 0;
 	private int receiptId = 0;
@@ -31,11 +31,16 @@ public class Receipt implements Serializable {
 		Random rand = new Random();
 		int n = rand.nextInt(1000000);
 		this.receiptId = n;
-		this.date = LocalDate.now();
-		this.receiptName = "" + regId + "-"+ date +"-"+ receiptId;
+		this.date = LocalDate.now().toString();
+		this.receiptName = "" + date +"-"+ receiptId;
 	}
 	
-	public Receipt() {}
+	public Receipt() {
+		this.date = LocalDate.now().toString();
+		Random rand = new Random();
+		int n = rand.nextInt(1000000);
+		this.receiptId = n;
+	}
 	
 	@XmlElement(name = "RegisterId")
     public void setRegisterId(int regId) {
@@ -65,11 +70,11 @@ public class Receipt implements Serializable {
     }
 	
 	@XmlElement(name = "Date")
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 	
-	public LocalDate getDate() {
+	public String getDate() {
         return this.date;
     }
 	

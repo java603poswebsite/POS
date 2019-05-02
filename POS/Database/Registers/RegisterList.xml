@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<registerList>
+    <Registers>
+        <Register>
+            <amountInRegister>1000.0</amountInRegister>
+            <RegisterId>396432</RegisterId>
+        </Register>
+    </Registers>
+</registerList>

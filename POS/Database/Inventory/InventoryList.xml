@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<inventoryList>
+    <Products>
+        <Product>
+            <Inventory>10</Inventory>
+            <Name>CannedFood</Name>
+            <Price>2.5</Price>
+            <Supplier>Minnesota</Supplier>
+            <Threshhold>0</Threshhold>
+            <pIdent>429562</pIdent>
+        </Product>
+        <Product>
+            <Inventory>3</Inventory>
+            <Name>Cat</Name>
+            <Price>200.0</Price>
+            <Supplier>Minnesota</Supplier>
+            <Threshhold>1</Threshhold>
+            <pIdent>256706</pIdent>
+        </Product>
+        <Product>
+            <Inventory>4</Inventory>
+            <Name>Dog</Name>
+            <Price>500.0</Price>
+            <Supplier>Minnesota</Supplier>
+            <Threshhold>1</Threshhold>
+            <pIdent>395651</pIdent>
+        </Product>
+        <Product>
+            <Inventory>10</Inventory>
+            <Name>PineApple</Name>
+            <Price>10.0</Price>
+            <Supplier>Hawaii</Supplier>
+            <Threshhold>0</Threshhold>
+            <pIdent>471775</pIdent>
+        </Product>
+        <Product>
+            <Inventory>10</Inventory>
+            <Name>Strawberry</Name>
+            <Price>5.0</Price>
+            <Supplier>California</Supplier>
+            <Threshhold>0</Threshhold>
+            <pIdent>62949</pIdent>
+        </Product>
+    </Products>
+</inventoryList>

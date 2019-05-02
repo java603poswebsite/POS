@@ -32,9 +32,9 @@ public class ReadWriteXML<T> {
 	    jaxbMarshaller.marshal(obj, System.out);
 	}
 	
-	public void receiptToXML(String filename, Receipt obj) throws Exception {  
+	public void UserReceiptListToXML(String filename, UserReceiptList obj) throws Exception {  
 	    File file = new File(filename);
-	    JAXBContext jaxbContext = JAXBContext.newInstance(Receipt.class);
+	    JAXBContext jaxbContext = JAXBContext.newInstance(UserReceiptList.class);
 
 	    Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
@@ -54,9 +54,9 @@ public class ReadWriteXML<T> {
 	    jaxbMarshaller.marshal(obj, System.out);
 	}
 	
-	public void ProductMasterListToXML(String filename, ProductMasterList obj) throws Exception {  
+	public void InventoryListToXML(String filename, InventoryList obj) throws Exception {  
 	    File file = new File(filename);
-	    JAXBContext jaxbContext = JAXBContext.newInstance(ProductMasterList.class);
+	    JAXBContext jaxbContext = JAXBContext.newInstance(InventoryList.class);
 
 	    Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
@@ -87,6 +87,9 @@ public class ReadWriteXML<T> {
 	    jaxbMarshaller.marshal(obj, file);
 	    jaxbMarshaller.marshal(obj, System.out);
 	}
+	
+	
+
 	
 	
 }

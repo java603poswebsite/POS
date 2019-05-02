@@ -1,3 +1,5 @@
+import java.util.Random;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -6,7 +8,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User {
 	private int userId = 0;
 	private String userName = "";
-	private String password = "";
+	private String pw = "";
+	
+	
+	public User() {
+		Random rand = new Random();
+		int n = rand.nextInt(1000000);
+		this.userId = n;
+	}
+	
+	
+	public User(String userName, String pw) {
+		Random rand = new Random();
+		int n = rand.nextInt(1000000);
+		this.userId = n;
+		this.userName = userName;
+		this.pw = pw;
+	}
+	
+	
 	
 	@XmlElement(name = "UserID")
 	public int getUserId() {
@@ -14,7 +34,7 @@ public class User {
 		
 	}
 	
-	public void setRegId(int userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 		
@@ -29,12 +49,12 @@ public class User {
 		
 	}
 		
-	@XmlElement(name = "PassWord")
-		public String getPassWord() {
-			return password;
+	@XmlElement(name = "PW")
+		public String getPW() {
+			return pw;
 		}
 		
-		public void setPassword(String password) {
-			this.password = password;
+		public void setPW(String pw) {
+			this.pw = pw;
 	}
 }
