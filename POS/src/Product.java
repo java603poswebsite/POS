@@ -29,7 +29,12 @@ public class Product implements Serializable {
 		this.supplier = supplier;
 	}
 	
-	public Product() {}
+	public Product() {
+		Random rand = new Random();
+		int n = rand.nextInt(1000000);
+		this.pIdent = n;
+		
+	}
 	
 	@XmlElement(name = "Name")
 	public String getName() {
@@ -61,7 +66,7 @@ public class Product implements Serializable {
 		return threshHold;
 	}
 	
-	public void setPassword(int threshhold) {
+	public void setThreshhold(int threshhold) {
 		this.threshHold = threshhold;
 }
 	@XmlElement(name = "Price")
