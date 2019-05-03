@@ -1,10 +1,10 @@
 import java.util.List;
 
 public class Calc {
-	private UserReceiptList allReceipts;
+	private UserReceiptList allSales;
 	
 	public Calc() {
-		allReceipts = new UserReceiptList();
+		allSales = new UserReceiptList();
 	}
 	
 	public void addSale(List<String> items, List<Integer> quantities, List<Double> prices, int registerID, int cashierID) {
@@ -13,5 +13,6 @@ public class Calc {
 			Product p = new Product(items.get(i), quantities.get(i), 0, prices.get(i), null);
 			thisSale.addReceiptItem(p);
 		}
+		allSales.addReceipt(thisSale);
 	}
 }
