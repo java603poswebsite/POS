@@ -1,15 +1,13 @@
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import javax.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
-
-import java.io.Serializable;
-import java.time.*;
 
 @XmlRootElement
 @XmlSeeAlso({Product.class})
@@ -96,6 +94,10 @@ public class Receipt implements Serializable {
     public void addReceiptItem(Product p) {
     	this.items.add(p);
     }
+
+	public void removeReceiptItem(Product p) {
+		// This needs to be implemented.
+	}
 	
 	
 	

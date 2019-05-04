@@ -1,11 +1,7 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 public class Calc {
-	private UserReceiptList allSales; 		// Record of all sales (lists that include items, register, cashier, etc.)
+	private UserReceiptList allSales; 		// Record of all sales.
 	private InventoryList masterInventory; 	// Reference to the master inventory list.
+	private Receipt sale = null;			// A sale.			
 	
 	// Inject the master inventory list to the local register.
 	public Calc(InventoryList invList) {
@@ -13,20 +9,44 @@ public class Calc {
 		masterInventory = invList;
 	}
 	
-	public void addSale(List<String> items, List<Integer> quantities, List<Double> prices, int registerID, int cashierID) {
-		Receipt thisSale = new Receipt(registerID, cashierID);
+	// Method for starting a sale.
+	public void startSale(int registerID, int cashierID) {
+		if(sale == null) {
+			sale = new Receipt(registerID, cashierID);
+		}
+	}
+	
+	// Method for adding individual items to a sale.
+	public void addItem(String item, int quantity, double price) {
+		Product p = new Product(item, quantity, 0, price, null);
+		sale.addReceiptItem(p);
+	}
+	
+	// Method for removing individual items from a sale.
+	public void removeItem(String item, int quantity, double price) {
+		Product p = new Product(item, quantity, 0, price, null);
+		sale.removeReceiptItem(p);
+	}
+	
+	// Method for finishing a sale.
+	public void finishSale() {
+		allSales.addReceipt(sale);
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
-		thisSale.setDate(dateFormat.format(date));
-		
-		for(int i = 0; i < items.size(); i++) {
-			Product p = new Product(items.get(i), quantities.get(i), 0, prices.get(i), null);
-			thisSale.addReceiptItem(p);
-			
-			// Update the master inventory.
+		// Update master inventory.	
+		for(Product p : sale.getItems()) {
 			masterInventory.removeProduct(p);
 		}
-		allSales.addReceipt(thisSale);
+		sale = null;
+	}
+	
+	// Method for returning individual items.
+	public void returnItem(String item, int quantity, double price) {
+		Product p = new Product(item, quantity, 0, price, null);
+		masterInventory.addProduct(p);
+	}
+	
+	// Method for canceling a sale.
+	public void cancelSale() {
+		sale = null;
 	}
 }
