@@ -6,7 +6,7 @@ public class Calc {
 	private InventoryList masterInventory; 	// Reference to the master inventory list.
 	private WriteReadDatabase dbService;	// Global database services			
 	
-	// Inject the master inventory list to the local register.
+	// Constructor
 	public Calc(User u, Register r, InventoryList mI, WriteReadDatabase dbS) {
 		allSales = new UserReceiptList();
 		user = u;
