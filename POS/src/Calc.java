@@ -1,18 +1,24 @@
 public class Calc {
-	private UserReceiptList allSales; 		// Record of all sales.
+	private UserReceiptList allSales; 		// Local record of all sales.
+	private Receipt sale = null;			// A sale.
+	private User user;						// Local user object
+	private Register pos;					// Local register object.
 	private InventoryList masterInventory; 	// Reference to the master inventory list.
-	private Receipt sale = null;			// A sale.			
+	private WriteReadDatabase dbService;	// Global database services			
 	
 	// Inject the master inventory list to the local register.
-	public Calc(InventoryList invList) {
+	public Calc(User u, Register r, InventoryList mI, WriteReadDatabase dbS) {
 		allSales = new UserReceiptList();
-		masterInventory = invList;
+		user = u;
+		pos = r;
+		masterInventory = mI;
+		this.dbService = dbS;
 	}
 	
 	// Method for starting a sale.
-	public void startSale(int registerID, int cashierID) {
+	public void startSale() {
 		if(sale == null) {
-			sale = new Receipt(registerID, cashierID);
+			sale = new Receipt(pos.getRegId(), user.getUserId());
 		}
 	}
 	
@@ -48,5 +54,10 @@ public class Calc {
 	// Method for canceling a sale.
 	public void cancelSale() {
 		sale = null;
+	}
+	
+	// Method for finishing a shift.
+	public void finishShift() {
+		dbService.writeReceipt(allSales);
 	}
 }
