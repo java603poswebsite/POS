@@ -15,6 +15,11 @@ public class Calc {
 		this.dbService = dbS;
 	}
 	
+	// Method for keeping track of cash in the register.
+	public void registerCash(double a) {
+		pos.setAmountInRegister(pos.getAmountInRegister() + a);
+	}
+	
 	// Method for starting a sale.
 	public void startSale() {
 		if(sale == null) {
@@ -59,5 +64,18 @@ public class Calc {
 	// Method for finishing a shift.
 	public void finishShift() {
 		dbService.writeReceipt(allSales);
+		dbService.writeInventoryList(masterInventory);
+		try {
+			RegisterList regList = dbService.ReadRegisterList();
+			for(Register r : regList.getRegisters()) {
+				if(r.getRegId() == pos.getRegId()) {
+					r.setAmountInRegister(r.getAmountInRegister() + pos.getAmountInRegister());
+					break;
+				}
+			}
+			dbService.writeRegisterList(regList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
