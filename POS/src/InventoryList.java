@@ -21,8 +21,8 @@ public class InventoryList implements Serializable{
 		
 		@XmlElementWrapper(name = "Products")
 	    @XmlElement(name = "Product")
-	    public List<Product> getProducts() {
-	        return products;
+	    public String getProducts() {
+	        return products.toString();
 	    }
 		
 		public void addProduct(Product p) {

@@ -16,66 +16,65 @@ public class Calc {
 	}
 	
 	// Method for keeping track of cash in the register.
-	public void registerCash(double a) {
-		pos.setAmountInRegister(pos.getAmountInRegister() + a);
-	}
-	
-	// Method for starting a sale.
-	public void startSale() {
-		if(sale == null) {
-			sale = new Receipt(pos.getRegId(), user.getUserId());
+		public void registerCash(double a) {
+			pos.setAmountInRegister(pos.getAmountInRegister() + a);
 		}
-	}
-	
-	// Method for adding individual items to a sale.
-	public void addItem(String item, int quantity, double price) {
-		Product p = new Product(item, quantity, 0, price, null);
-		sale.addReceiptItem(p);
-	}
-	
-	// Method for removing individual items from a sale.
-	public void removeItem(String item, int quantity, double price) {
-		Product p = new Product(item, quantity, 0, price, null);
-		sale.removeReceiptItem(p);
-	}
-	
-	// Method for finishing a sale.
-	public void finishSale() {
-		allSales.addReceipt(sale);
 		
-		// Update master inventory.	
-		for(Product p : sale.getItems()) {
-			masterInventory.removeProduct(p);
-		}
-		sale = null;
-	}
-	
-	// Method for returning individual items.
-	public void returnItem(String item, int quantity, double price) {
-		Product p = new Product(item, quantity, 0, price, null);
-		masterInventory.addProduct(p);
-	}
-	
-	// Method for canceling a sale.
-	public void cancelSale() {
-		sale = null;
-	}
-	
-	// Method for finishing a shift.
-	public void finishShift() {
-		dbService.writeReceipt(allSales);
-		dbService.writeInventoryList(masterInventory);
-		try {
-			RegisterList regList = dbService.ReadRegisterList();
-			for(Register r : regList.getRegisters()) {
-				if(r.getRegId() == pos.getRegId()) {
-					r.setAmountInRegister(r.getAmountInRegister() + pos.getAmountInRegister());
-					break;
+		// Method for starting a sale.
+				public void startSale() {
+					if(sale == null) {			sale = new Receipt(pos.getRegId(), user.getUserId());
+					}
 				}
+				
+				// Method for adding individual items to a sale.
+				public void addItem(String item, int quantity, double price) {
+					Product p = new Product(item, quantity, 0, price, null);
+					sale.addReceiptItem(p);
+				}
+				
+				// Method for removing individual items from a sale.
+				public void removeItem(String item, int quantity, double price) {
+					Product p = new Product(item, quantity, 0, price, null);
+					sale.removeReceiptItem(p);
+				}
+				
+				// Method for finishing a sale.
+				public void finishSale() {
+					allSales.addReceipt(sale);
+					
+					// Update master inventory.	
+					for(Product p : sale.getItems()) {
+						masterInventory.removeProduct(p);
+					}
+					sale = null;
+				}
+				
+				// Method for returning individual items.
+				public void returnItem(String item, int quantity, double price) {
+					Product p = new Product(item, quantity, 0, price, null);
+					masterInventory.addProduct(p);
+				}
+				
+				// Method for canceling a sale.
+				public void cancelSale() {
+					sale = null;
+				}
+				
+	// Method for finishing a shift.
+		public void finishShift() {
+			dbService.writeReceipt(allSales);
+			dbService.writeInventoryList(masterInventory);
+			try {
+				RegisterList regList = dbService.ReadRegisterList();
+				for(Register r : regList.getRegister()) {
+					if(r.getRegId() == pos.getRegId()) {
+						r.setAmountInRegister(r.getAmountInRegister() + pos.getAmountInRegister());
+						break;
+					}
+				}
+				dbService.writeRegisterList(regList);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			dbService.writeRegisterList(regList);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }

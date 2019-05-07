@@ -30,9 +30,10 @@ public class UserReceiptList {
 	
 	@XmlElementWrapper(name = "Receipts")
     @XmlElement(name = "Receipt")
-    public List<Receipt> getReceipts() {
-        return userReceipts;
+    public String getReceipts() {
+        return userReceipts.toString();
     }
+	
 	
 	public void addReceipt(Receipt r) {
 		if (!userReceipts.contains(r)) {

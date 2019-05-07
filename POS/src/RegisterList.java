@@ -18,10 +18,13 @@ public class RegisterList implements Serializable {
 	
 	@XmlElementWrapper(name = "Registers")
     @XmlElement(name = "Register")
-    public List<Register> getRegisters() {
-        return registers;
+    public String getRegisters() {
+        return registers.toString();
     }
-	
+	 
+	 public List<Register> getRegister() {
+	        return registers;
+	    }
 	public void addRegister(Register r) {
 		if (!registers.contains(r)) {
 			registers.add(r);
