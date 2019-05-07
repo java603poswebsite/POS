@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-
+import java.util.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -21,8 +21,9 @@ public class InventoryList implements Serializable{
 		
 		@XmlElementWrapper(name = "Products")
 	    @XmlElement(name = "Product")
-	    public String getProducts() {
-	        return products.toString();
+	    public String toString() {
+	        //return products.toString();
+	       return Arrays.toString(products.toArray());
 	    }
 		public List<Product> getProduct() {
 	        return products;

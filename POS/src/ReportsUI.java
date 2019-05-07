@@ -77,7 +77,7 @@ public class ReportsUI extends Gui {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	reportArea.setText(I.getProducts());	
+		    	reportArea.setText("Inventory Report: "+I.toString());	
 		    }
 		});
 		JButton rdbtnCashierReport = new JButton("Cashier Report");
@@ -85,7 +85,7 @@ public class ReportsUI extends Gui {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	reportArea.setText(U.getReceipts());
+		    	reportArea.setText("Cashier Report: "+U.toString());
 		   
 		    }
 		});
@@ -94,7 +94,7 @@ public class ReportsUI extends Gui {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	reportArea.setText(R.getRegisters());
+		    	reportArea.setText("Register Report: "+R.toString());
 		    }
 		});
 		txtSelectReportType = new JTextField();

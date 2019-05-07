@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,9 +31,10 @@ public class UserReceiptList {
 	
 	@XmlElementWrapper(name = "Receipts")
     @XmlElement(name = "Receipt")
-    public String getReceipts() {
-        return userReceipts.toString();
-    }
+    public String toString() {
+        //return userReceipts.toString();
+		 return Arrays.toString(userReceipts.toArray());
+	}
 	 public List<Receipt> getReceipt() {
 	        return userReceipts;
 	    }

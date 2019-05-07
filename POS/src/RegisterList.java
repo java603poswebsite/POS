@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,8 +19,9 @@ public class RegisterList implements Serializable {
 	
 	@XmlElementWrapper(name = "Registers")
     @XmlElement(name = "Register")
-    public String getRegisters() {
-        return registers.toString();
+    public String toString() {
+        //return registers.toString();
+		 return Arrays.toString(registers.toArray());
     }
 	 
 	 public List<Register> getRegister() {
