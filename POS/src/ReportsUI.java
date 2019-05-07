@@ -5,7 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
-
+import java.awt.*;  
+import java.awt.event.*;  
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class ReportsUI extends Gui {
@@ -67,17 +67,39 @@ public class ReportsUI extends Gui {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.DARK_GRAY);
 		
-		JRadioButton rdbtnInventoryReport = new JRadioButton("Inventory Report");
+
+		InventoryList I = new InventoryList();
+		UserReceiptList U = new UserReceiptList();
+		RegisterList R = new RegisterList();
 		
-		JRadioButton rdbtnCashierReport = new JRadioButton("Cashier Report");
-		
-		JRadioButton rdbtnRegisterReport = new JRadioButton("Register Report");
-		
+		JButton rdbtnInventoryReport = new JButton("Inventory Report");
+		rdbtnInventoryReport.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	reportArea.setText(I.getProducts());	
+		    }
+		});
+		JButton rdbtnCashierReport = new JButton("Cashier Report");
+		rdbtnCashierReport.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	reportArea.setText(U.getReceipts());
+		   
+		    }
+		});
+		JButton rdbtnRegisterReport = new JButton("Register Report");
+		rdbtnRegisterReport.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	reportArea.setText(R.getRegisters());
+		    }
+		});
 		txtSelectReportType = new JTextField();
 		txtSelectReportType.setText("Select Report Type");
 		txtSelectReportType.setColumns(10);
-		
-		JButton btnGenerate = new JButton("Generate");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -89,8 +111,7 @@ public class ReportsUI extends Gui {
 							.addComponent(rdbtnInventoryReport, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(rdbtnCashierReport, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(rdbtnRegisterReport, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addComponent(txtSelectReportType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnGenerate))
+						.addComponent(txtSelectReportType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -115,9 +136,7 @@ public class ReportsUI extends Gui {
 									.addGap(24)
 									.addComponent(rdbtnCashierReport)
 									.addGap(13)
-									.addComponent(rdbtnRegisterReport)
-									.addGap(29)
-									.addComponent(btnGenerate))
+									.addComponent(rdbtnRegisterReport))
 								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 415, Short.MAX_VALUE))
 							.addContainerGap())))
 		);
@@ -153,23 +172,20 @@ public class ReportsUI extends Gui {
 		txtpnGroceries.setText("REPORTS");
 		panel_2.add(txtpnGroceries);
 		
-		InventoryList I = new InventoryList();
-		UserReceiptList U = new UserReceiptList();
-		RegisterList R = new RegisterList();
-		
 		reportArea = new JTextField();
 		reportArea.setColumns(10);
 		
-		if(rdbtnInventoryReport.isSelected()){
-				reportArea.setText(I.getProducts());	
-            }
-        else if(rdbtnCashierReport.isSelected()){
-        		reportArea.setText(U.getReceipts());	
-        	}
-        else if(rdbtnRegisterReport.isSelected()){
-            reportArea.setText(R.getRegisters());
-        }
-       
+		
+       /* EventHandler<KeyEvent> carPriceEventHandler = new EventHandler<KeyEvent>() {
+			 @Override 
+			 public void handle(KeyEvent e) {
+				 totalPaidNumberLabel.setText(priceText.getText());
+			 } 
+		 };
+		 priceText.addEventHandler(KeyEvent.KEY_RELEASED, carPriceEventHandler);	      
+	}
+        * 
+        */
 		
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(

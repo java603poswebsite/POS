@@ -33,7 +33,9 @@ public class UserReceiptList {
     public String getReceipts() {
         return userReceipts.toString();
     }
-	
+	 public List<Receipt> getReceipt() {
+	        return userReceipts;
+	    }
 	
 	public void addReceipt(Receipt r) {
 		if (!userReceipts.contains(r)) {

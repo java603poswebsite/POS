@@ -24,7 +24,9 @@ public class InventoryList implements Serializable{
 	    public String getProducts() {
 	        return products.toString();
 	    }
-		
+		public List<Product> getProduct() {
+	        return products;
+	    }
 		public void addProduct(Product p) {
 			if (!products.contains(p)) {
 				products.add(p);
