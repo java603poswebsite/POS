@@ -10,6 +10,14 @@
             <pIdent>429562</pIdent>
         </Product>
         <Product>
+            <Inventory>20</Inventory>
+            <Name>Carrots</Name>
+            <Price>5.0</Price>
+            <Supplier>bugsbunny</Supplier>
+            <Threshhold>5</Threshhold>
+            <pIdent>222460</pIdent>
+        </Product>
+        <Product>
             <Inventory>3</Inventory>
             <Name>Cat</Name>
             <Price>200.0</Price>
@@ -40,6 +48,14 @@
             <Supplier>California</Supplier>
             <Threshhold>3</Threshhold>
             <pIdent>62949</pIdent>
+        </Product>
+        <Product>
+            <Inventory>20</Inventory>
+            <Name>Tabby</Name>
+            <Price>30.0</Price>
+            <Supplier>Hobo</Supplier>
+            <Threshhold>5</Threshhold>
+            <pIdent>868184</pIdent>
         </Product>
     </Products>
 </inventoryList>

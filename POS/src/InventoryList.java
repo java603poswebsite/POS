@@ -67,6 +67,9 @@ public class InventoryList implements Serializable{
 			else if (indx <= 0) {
 				prod = null;
 			}
+			else if (start == end) {
+				prod = null;
+			}
 			return prod;
 		}
 		
