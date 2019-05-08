@@ -34,12 +34,28 @@
             <pIdent>395651</pIdent>
         </Product>
         <Product>
+            <Inventory>5</Inventory>
+            <Name>Persian</Name>
+            <Price>3.0</Price>
+            <Supplier>RichGuy</Supplier>
+            <Threshhold>4</Threshhold>
+            <pIdent>23150</pIdent>
+        </Product>
+        <Product>
             <Inventory>10</Inventory>
             <Name>PineApple</Name>
             <Price>10.0</Price>
             <Supplier>Hawaii</Supplier>
             <Threshhold>5</Threshhold>
             <pIdent>471775</pIdent>
+        </Product>
+        <Product>
+            <Inventory>40</Inventory>
+            <Name>RussianGrey</Name>
+            <Price>3.0</Price>
+            <Supplier>Russian</Supplier>
+            <Threshhold>10</Threshhold>
+            <pIdent>117335</pIdent>
         </Product>
         <Product>
             <Inventory>10</Inventory>

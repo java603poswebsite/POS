@@ -337,7 +337,7 @@ public class HomeWin extends Gui {
 				}
 			}
 			panel_1.revalidate();
-			//panel_1.repaint();
+			panel_1.repaint();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -371,8 +371,8 @@ public class HomeWin extends Gui {
         {  
             public void actionPerformed( ActionEvent e )  
             {  
-                //if (numberCheck(Inventory.getText()) && numberCheck(Threshhold.getText()) && numberCheck(Price.getText()) && prodName.getText().length() > 3) 
-            	//{
+                if (numberCheck(Inventory.getText()) && numberCheck(Threshhold.getText()) && numberCheck(Price.getText()) && prodName.getText().length() > 3) 
+            	{
                 	try {
 						Product p = new Product(prodName.getText(), Integer.parseInt(Inventory.getText()), Integer.parseInt(Threshhold.getText()), Double.parseDouble(Price.getText()), Supplier.getText() );
 						InventoryList invList = database.ReadInventoryList();
@@ -387,7 +387,7 @@ public class HomeWin extends Gui {
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
-                //}
+                }
 
                 
             }  
