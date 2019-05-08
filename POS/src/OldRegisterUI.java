@@ -9,36 +9,45 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.awt.Container;
-
 import javax.swing.JTextPane;
 import java.awt.Font;
+import java.awt.Point;
+
 import javax.swing.JMenuBar;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
-import javax.swing.JDesktopPane;
-import javax.swing.JDialog;
 
-public class HomeWin extends JFrame {
+public class OldRegisterUI extends Gui {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private Container jDesktopPanel;
 	private WriteReadDatabase database = new WriteReadDatabase();
 
 	/**
-	 * Launch the application.hello
+	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -46,6 +55,7 @@ public class HomeWin extends JFrame {
 				try {
 					HomeWin window = new HomeWin();
 					window.frame.setVisible(true);
+					window.frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -64,13 +74,13 @@ public class HomeWin extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		try {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(176, 224, 230));
 		frame.setBounds(100, 100, 1020, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+		
 		JPanel panel = new JPanel();
-		dispose();
 		panel.setBackground(Color.DARK_GRAY);
 		
 		JLabel lblTotal = new JLabel("Total:");
@@ -96,28 +106,15 @@ public class HomeWin extends JFrame {
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
 		
+		WriteReadDatabase database = new WriteReadDatabase();
+		
+		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.DARK_GRAY);
-		
-		JLabel lblAmountReceived = new JLabel("Amount received $:");
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		
-		JLabel lblTotalChange = new JLabel("Total change $:");
-		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		
-		JButton btnConfirmTransaction = new JButton("Confirm Transaction");
-		
-		JDesktopPane desktopPane = new JDesktopPane();
-		
-		JDesktopPane desktopPane_1 = new JDesktopPane();
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 1036, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 1004, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -136,71 +133,45 @@ public class HomeWin extends JFrame {
 										.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 									.addPreferredGap(ComponentPlacement.RELATED))
-								.addComponent(btnCalcelOrder))
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblAmountReceived)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblTotalChange, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textField_5, 0, 0, Short.MAX_VALUE))
-								.addComponent(btnConfirmTransaction)))
+								.addComponent(btnCalcelOrder)))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(13)
-							.addComponent(desktopPane, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGap(20)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(textField_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-							.addComponent(desktopPane_1, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(textField_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))))
 					.addGap(18)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 550, GroupLayout.PREFERRED_SIZE)
-					.addGap(61))
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 605, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(32)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel_1, 0, 0, Short.MAX_VALUE)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							.addComponent(desktopPane, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 235, GroupLayout.PREFERRED_SIZE)
-										.addGap(11)
-										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-											.addComponent(lblTax)
-											.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-									.addGroup(groupLayout.createSequentialGroup()
-										.addGap(17)
-										.addComponent(desktopPane_1, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)))
-								.addGap(12)
-								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-									.addComponent(lblSubtotal)
-									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addComponent(lblAmountReceived)
-									.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGap(12)
-								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-									.addComponent(lblTotal)
-									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addComponent(btnConfirmTransaction))
-								.addGap(18)
-								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-									.addComponent(btnCalcelOrder)
-									.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addComponent(lblTotalChange)))))
-					.addGap(8))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 235, GroupLayout.PREFERRED_SIZE)
+							.addGap(11)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblTax)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(12)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblSubtotal)
+								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(12)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblTotal)
+								.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addComponent(btnCalcelOrder)
+							.addGap(8))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 415, Short.MAX_VALUE)
+							.addContainerGap())))
 		);
 		
 		JTextPane txtpnReceipt = new JTextPane();
@@ -210,8 +181,36 @@ public class HomeWin extends JFrame {
 		txtpnReceipt.setText("ITEM COST - RECEIPT ");
 		panel_3.add(txtpnReceipt);
 		
-		JButton btnBananas = new JButton("");
-		btnBananas.setIcon(new ImageIcon("C:\\Users\\Maria Torres\\git\\POS1\\POS\\images\\bananas.jpg"));
+	
+	    
+		//JButton btnMangos = new JButton("");
+		//btnMangos.setForeground(Color.WHITE);
+		//btnMangos.setBackground(Color.WHITE);
+		//btnMangos.addActionListener(new ActionListener() {
+		//	public void actionPerformed(ActionEvent arg0) {
+		//	}
+		//});
+		
+		//URL urlmango = getClass().getResource("Mango.jpg");
+		//btnMangos.setIcon(new ImageIcon(urlmango.getPath()));
+		//JButton btnBananas = new JButton("");
+		//URL urlbananas = getClass().getResource("bananas.jpg");
+		
+		//btnBananas.setIcon(new ImageIcon(urlbananas.getPath()));
+		
+		//URL urlstrawberry = getClass().getResource("strawberry.jpg");
+		
+		//JButton btnVodka = new JButton("");
+		//btnVodka.setIcon(new ImageIcon(urlstrawberry.getPath()));
+		
+		//JButton btnKiwi = new JButton("");
+		//btnKiwi.addActionListener(new ActionListener() {
+		//	public void actionPerformed(ActionEvent e) {
+		//	}
+		//});
+		
+		//URL url = getClass().getResource("kiwi.jpg");
+		//btnKiwi.setIcon(new ImageIcon(url.getPath()));
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.DARK_GRAY);
@@ -223,42 +222,72 @@ public class HomeWin extends JFrame {
 		txtpnGroceries.setText("GROCERIES");
 		panel_2.add(txtpnGroceries);
 		
-		JDesktopPane desktopPane_2 = new JDesktopPane();
+		//URL urlmilk = getClass().getResource("milk.jpg");
+		
+		//JButton btnNewButton = new JButton("");
+		//btnNewButton.setIcon(new ImageIcon(urlmilk.getPath()));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+				.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(btnBananas, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(desktopPane_2, GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
-					.addGap(16))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+							//.addComponent(btnBananas, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+							//.addComponent(btnKiwi, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 116, Short.MAX_VALUE)
+								)
+						//.addComponent(btnMangos, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+						)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(18)
+						//	.addComponent(btnVodka, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+							)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							//.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+							))
+				//	.addContainerGap(327, Short.MAX_VALUE)
+						)
 		);
+
+		
+
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
+				.addGroup(
+						gl_panel_1.createSequentialGroup()
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+					.addGap(84)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						//.addComponent(btnKiwi, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+						//.addComponent(btnVodka, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+							)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnBananas, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-						.addComponent(desktopPane_2, GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							//.addComponent(btnMangos, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+						//.addComponent(btnBananas, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+							)
+						//.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
+						)
 					.addContainerGap())
 		);
 		panel_1.setLayout(gl_panel_1);
 		
 		// adding inventory buttons dynamically
-				inventoryButtons(panel_1);
-				
-				JButton addProd = new JButton("Add");
-				addProd.setBounds(450 , 390 , 100 , 30);
-				panel_1.add(addProd);
-				addProd.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						addProd(frame, panel_1);
-					}
-				});
+		inventoryButtons(panel_1);
 		
+		JButton addProd = new JButton("Add");
+		addProd.setBounds(500 , 390 , 100 , 30);
+		panel_1.add(addProd);
+		addProd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				addProd(frame, panel_1);
+			}
+		});
 		
 		JTextPane txtpnSupermart = new JTextPane();
 		txtpnSupermart.setBackground(Color.DARK_GRAY);
@@ -275,22 +304,16 @@ public class HomeWin extends JFrame {
 		menuBar.add(btnMainMenu);
 		
 		JButton btnReports = new JButton("Reports");
-		btnReports.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				//Reports repo = new Reports ();
-				//repo.setVisible(true);
-			}
-		});
 		menuBar.add(btnReports);
-		//Reports repo = new Reports();
-		//((Reports) repo).setVisible(true);
 		
 		JButton btnRegisters = new JButton("Registers");
 		menuBar.add(btnRegisters);
-	}
-
-	public void setVisible(boolean visible) {
+		} catch (Exception e1) {
+			e1.getCause();
+			e1.printStackTrace();
+		}
+		
+		
 		
 	}
 	
@@ -305,7 +328,7 @@ public class HomeWin extends JFrame {
 				String name = p.getName();
 				
 				final JButton button = new JButton(name);
-				button.setBounds(0 + 135*row , 50 + 60*col , 135 , 60);
+				button.setBounds(0 + 150*row , 50 + 60*col , 150 , 60);
 				panel_1.add(button);
 				row++;
 				if (row >= 4) {
@@ -411,6 +434,3 @@ public class HomeWin extends JFrame {
 		  return Pattern.matches(fpRegex, input);
 }
 }
-
-	
-

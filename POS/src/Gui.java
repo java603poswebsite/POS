@@ -1,7 +1,4 @@
-
-
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
@@ -123,3 +120,4 @@ public class Gui  {
 		frame.getContentPane().setLayout(groupLayout);
 	}
 }
+
