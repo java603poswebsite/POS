@@ -2,6 +2,22 @@
 <inventoryList>
     <Products>
         <Product>
+            <Inventory>6</Inventory>
+            <Name>AmericanShorthair</Name>
+            <Price>12.0</Price>
+            <Supplier>USA</Supplier>
+            <Threshhold>3</Threshhold>
+            <pIdent>67571</pIdent>
+        </Product>
+        <Product>
+            <Inventory>60</Inventory>
+            <Name>Blue</Name>
+            <Price>30.0</Price>
+            <Supplier>Ocean</Supplier>
+            <Threshhold>10</Threshhold>
+            <pIdent>635707</pIdent>
+        </Product>
+        <Product>
             <Inventory>10</Inventory>
             <Name>CannedFood</Name>
             <Price>2.5</Price>
@@ -34,6 +50,30 @@
             <pIdent>395651</pIdent>
         </Product>
         <Product>
+            <Inventory>50</Inventory>
+            <Name>Hair</Name>
+            <Price>5.0</Price>
+            <Supplier>Rabbit</Supplier>
+            <Threshhold>10</Threshhold>
+            <pIdent>997698</pIdent>
+        </Product>
+        <Product>
+            <Inventory>40</Inventory>
+            <Name>newProduct</Name>
+            <Price>7.0</Price>
+            <Supplier>something</Supplier>
+            <Threshhold>15</Threshhold>
+            <pIdent>569232</pIdent>
+        </Product>
+        <Product>
+            <Inventory>2</Inventory>
+            <Name>Nutella</Name>
+            <Price>10.0</Price>
+            <Supplier>Nutella</Supplier>
+            <Threshhold>1</Threshhold>
+            <pIdent>339154</pIdent>
+        </Product>
+        <Product>
             <Inventory>5</Inventory>
             <Name>Persian</Name>
             <Price>3.0</Price>
@@ -48,6 +88,14 @@
             <Supplier>Hawaii</Supplier>
             <Threshhold>5</Threshhold>
             <pIdent>471775</pIdent>
+        </Product>
+        <Product>
+            <Inventory>50</Inventory>
+            <Name>Pop Tarts</Name>
+            <Price>5.0</Price>
+            <Supplier>FoodInc</Supplier>
+            <Threshhold>10</Threshhold>
+            <pIdent>183768</pIdent>
         </Product>
         <Product>
             <Inventory>40</Inventory>
@@ -72,6 +120,14 @@
             <Supplier>Hobo</Supplier>
             <Threshhold>5</Threshhold>
             <pIdent>868184</pIdent>
+        </Product>
+        <Product>
+            <Inventory>12</Inventory>
+            <Name>White</Name>
+            <Price>12.0</Price>
+            <Supplier>White</Supplier>
+            <Threshhold>12</Threshhold>
+            <pIdent>772557</pIdent>
         </Product>
     </Products>
 </inventoryList>

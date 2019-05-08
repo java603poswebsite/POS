@@ -46,6 +46,7 @@ public class HomeWin extends JFrame {
 				try {
 					HomeWin window = new HomeWin();
 					window.frame.setVisible(true);
+					window.frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,7 +67,7 @@ public class HomeWin extends JFrame {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(176, 224, 230));
-		frame.setBounds(100, 100, 1020, 600);
+		frame.setBounds(100, 100, 1020, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		JPanel panel = new JPanel();
@@ -154,7 +155,7 @@ public class HomeWin extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(textField_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))
+								.addComponent(textField_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
 							.addComponent(desktopPane_1, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)))
 					.addGap(18)
@@ -176,7 +177,7 @@ public class HomeWin extends JFrame {
 									.addGroup(groupLayout.createSequentialGroup()
 										.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 235, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
 										.addGap(11)
 										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 											.addComponent(lblTax)
@@ -210,8 +211,8 @@ public class HomeWin extends JFrame {
 		txtpnReceipt.setText("ITEM COST - RECEIPT ");
 		panel_3.add(txtpnReceipt);
 		
-		JButton btnBananas = new JButton("");
-		btnBananas.setIcon(new ImageIcon("C:\\Users\\Maria Torres\\git\\POS1\\POS\\images\\bananas.jpg"));
+		//JButton btnBananas = new JButton("");
+		//btnBananas.setIcon(new ImageIcon("C:\\Users\\Maria Torres\\git\\POS1\\POS\\images\\bananas.jpg"));
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.DARK_GRAY);
@@ -230,7 +231,7 @@ public class HomeWin extends JFrame {
 				.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(btnBananas, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
+					//.addComponent(btnBananas, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(desktopPane_2, GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
 					.addGap(16))
@@ -241,23 +242,25 @@ public class HomeWin extends JFrame {
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnBananas, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+						//.addComponent(btnBananas, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
 						.addComponent(desktopPane_2, GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		panel_1.setLayout(gl_panel_1);
 		
+		JPanel panelProductButtons = new JPanel();
+		panel_1.add(panelProductButtons);
 		// adding inventory buttons dynamically
 				inventoryButtons(panel_1);
 				
-				JButton addProd = new JButton("Add");
-				addProd.setBounds(450 , 390 , 100 , 30);
-				panel_1.add(addProd);
-				addProd.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						addProd(frame, panel_1);
-					}
-				});
+			//	JButton addProd = new JButton("Add");
+			//	addProd.setBounds(450 , 700 , 100 , 30);
+			//	panel_1.add(addProd);
+			//	addProd.addActionListener(new ActionListener() {
+				//	public void actionPerformed(ActionEvent e) {
+				//		addProd(frame, panel_1);
+				//	}
+				//});
 		
 		
 		JTextPane txtpnSupermart = new JTextPane();
@@ -299,6 +302,44 @@ public class HomeWin extends JFrame {
 			InventoryList inv = database.ReadInventoryList();
 			List<Product> prod = inv.getProducts();
 			panel_1.removeAll();
+			JPanel panel_2 = new JPanel();
+			panel_2.setBackground(Color.DARK_GRAY);
+			
+			JTextPane txtpnGroceries = new JTextPane();
+			txtpnGroceries.setForeground(Color.WHITE);
+			txtpnGroceries.setFont(new Font("Tahoma", Font.BOLD, 19));
+			txtpnGroceries.setBackground(Color.DARK_GRAY);
+			txtpnGroceries.setText("GROCERIES");
+			panel_2.add(txtpnGroceries);
+			
+			GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+			gl_panel_1.setHorizontalGroup(
+				gl_panel_1.createParallelGroup(Alignment.LEADING)
+					.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+					.addGroup(gl_panel_1.createSequentialGroup()
+						.addContainerGap()
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGap(16))
+			);
+			gl_panel_1.setVerticalGroup(
+				gl_panel_1.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel_1.createSequentialGroup()
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+							
+								)
+						.addContainerGap())
+			);
+			panel_1.setLayout(gl_panel_1);
+			JButton addProd = new JButton("Add");
+			addProd.setBounds(450 , 500 , 100 , 30);
+			panel_1.add(addProd);
+			addProd.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					addProd(frame, panel_1);
+				}
+			});
+			
 			int row = 0;
 			int col = 0;
 			for (Product p : prod) {
