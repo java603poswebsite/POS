@@ -21,10 +21,50 @@ public class InventoryList implements Serializable{
 		
 		@XmlElementWrapper(name = "Products")
 	    @XmlElement(name = "Product")
-	    public String toString() {
+	 /* public String toString() {
 	        //return products.toString();
-	       return Arrays.toString(products.toArray());
-	    }
+	      return Arrays.toString(products.toArray());
+	       
+	    }*/
+		public String toString() {
+			if (products != null) {
+				for (Product i : products)
+					System.out.println(i);
+				return products.toString();
+			}
+			else
+				return null;
+		}
+		//	Iterator<Product> i = products.iterator();
+			//while(i.hasNext())
+			  //  System.out.print(i.next()+"\t");}
+			/*Iterator<Product> i = products.iterator();
+		    if (! i.hasNext()) {
+		        return "[]";
+		    }
+
+		    StringBuilder sb = new StringBuilder();
+		    sb.append('[');
+		    for (;;) {
+		        Object element = i.next();
+		        sb.append(i == this ? "(this Collection)" : element);
+		        if (! i.hasNext()) {
+		            return sb.append(']').toString();
+		        }
+		        sb.append(", ");
+		    }
+		}
+		/*public String toString() {
+		    String listRepresentation = "";
+		    List<Product> currentNode = products;
+
+		    while (currentNode != null) {
+		        listRepresentation += currentNode.getInfo() + "\n";
+		        currentNode = currentNode.getNextNode();
+		    }
+
+		    return listRepresentation;
+		}*/
 		public List<Product> getProduct() {
 	        return products;
 	    }

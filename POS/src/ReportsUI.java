@@ -1,8 +1,13 @@
 import java.awt.Color;
+import java.io.File;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.*;  
@@ -15,6 +20,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.lang.*;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import javax.swing.JTextField;
 
 public class ReportsUI extends Gui {
@@ -33,12 +45,17 @@ public class ReportsUI extends Gui {
 				try {
 					ReportsUI window = new ReportsUI();
 					window.frame.setVisible(true);
+//					ReportsUI frame = new ReportsUI();
+	//				frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+						
 				}
 			}
 		});
 	}
+
+	
 
 	/**
 	 * Create the application.
@@ -67,17 +84,18 @@ public class ReportsUI extends Gui {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.DARK_GRAY);
 		
-
-		InventoryList I = new InventoryList();
-		UserReceiptList U = new UserReceiptList();
-		RegisterList R = new RegisterList();
 		
 		JButton rdbtnInventoryReport = new JButton("Inventory Report");
 		rdbtnInventoryReport.addActionListener(new ActionListener() {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	reportArea.setText("Inventory Report: "+I.toString());	
+		    	try {
+					printI();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    }
 		});
 		JButton rdbtnCashierReport = new JButton("Cashier Report");
@@ -85,8 +103,12 @@ public class ReportsUI extends Gui {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	reportArea.setText("Cashier Report: "+U.toString());
-		   
+		    	try {
+					printC();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    }
 		});
 		JButton rdbtnRegisterReport = new JButton("Register Report");
@@ -94,9 +116,15 @@ public class ReportsUI extends Gui {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	reportArea.setText("Register Report: "+R.toString());
+		    	try {
+					printR();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    }
 		});
+		
 		txtSelectReportType = new JTextField();
 		txtSelectReportType.setText("Select Report Type");
 		txtSelectReportType.setColumns(10);
@@ -175,17 +203,7 @@ public class ReportsUI extends Gui {
 		reportArea = new JTextField();
 		reportArea.setColumns(10);
 		
-		
-       /* EventHandler<KeyEvent> carPriceEventHandler = new EventHandler<KeyEvent>() {
-			 @Override 
-			 public void handle(KeyEvent e) {
-				 totalPaidNumberLabel.setText(priceText.getText());
-			 } 
-		 };
-		 priceText.addEventHandler(KeyEvent.KEY_RELEASED, carPriceEventHandler);	      
-	}
-        * 
-        */
+	
 		
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
@@ -223,11 +241,35 @@ public class ReportsUI extends Gui {
 		
 		JButton btnMainMenu = new JButton("Main Menu");
 		menuBar.add(btnMainMenu);
-		
+
 		JButton btnReports = new JButton("Reports");
 		menuBar.add(btnReports);
 		
 		JButton btnRegisters = new JButton("Registers");
 		menuBar.add(btnRegisters);
 	}
+	
+	 
+	void printI() throws Exception {
+		/*File file = new File("/POS/Database/Inventory/InventoryList.xml");
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		DocumentBuilder db = dbf.newDocumentBuilder();
+		Document document = db.parse(file);
+		
+		WriteReadDatabase w = new WriteReadDatabase();*/
+		//InventoryList l = w.ReadInventoryList();
+		WriteReadDatabase w = new WriteReadDatabase();
+		reportArea.setText("Inventory report: "+w.ReadInventoryList().getClass().getSimpleName());//l); /POS/Database/Inventory/InventoryList.xml
+	}
+	void printC() throws Exception {
+		WriteReadDatabase w = new WriteReadDatabase();
+		reportArea.setText("User receipt list report: " +w.ReadReceiptList(2019-05-02, 396432, Nikolai));//w.ReadUserList().getClass().getSimpleName());
+	}
+	void printR() throws Exception {
+		WriteReadDatabase w = new WriteReadDatabase();
+
+		reportArea.setText("Register day report: " +w.ReadReceiptList(2019-05-02, null, null).getClass().getSimpleName());
+	}
+	
+	
 }

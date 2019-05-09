@@ -54,7 +54,7 @@ public class ReadWriteXML<T> {
 	    jaxbMarshaller.marshal(obj, System.out);
 	}
 	
-	public void InventoryListToXML(String filename, InventoryList obj) throws Exception {  
+	public static void InventoryListToXML(String filename, InventoryList obj) throws Exception {  
 	    File file = new File(filename);
 	    JAXBContext jaxbContext = JAXBContext.newInstance(InventoryList.class);
 
