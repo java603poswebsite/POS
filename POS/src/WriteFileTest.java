@@ -73,7 +73,7 @@ public class WriteFileTest {
 			receiptlist.addReceipt(receipt);
 			
 			//wrd.writeInventoryList(il);
-			wrd.writeReceipt(receiptlist);
+			//wrd.writeReceipt(receiptlist);
 			//wrd.writeRegisterList(rl);
 			//wrd.writeUserList(ul);
 			//wrd.writeReceipt(receiptList);

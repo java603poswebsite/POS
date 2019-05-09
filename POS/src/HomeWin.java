@@ -8,6 +8,8 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
 import java.awt.Color;
 import java.awt.Container;
 
@@ -31,12 +33,16 @@ public class HomeWin extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextArea textField_3 = new JTextArea();
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private Container jDesktopPanel;
+	private User user = new User("Nikolai", "12345", 35);
+	private Register register = new Register(396432, 1000.0);
 	private WriteReadDatabase database = new WriteReadDatabase();
-
+	//private Receipt receipt = new Receipt(396432, 35); // placeholder until we get real credentials in here
+	private Calc calc = new Calc(user, register, textField_3);
+	
 	/**
 	 * Launch the application.hello
 	 */
@@ -94,7 +100,7 @@ public class HomeWin extends JFrame {
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
 		
-		textField_3 = new JTextField();
+		textField_3.setLineWrap(true);
 		textField_3.setColumns(10);
 		
 		JPanel panel_3 = new JPanel();
@@ -347,6 +353,36 @@ public class HomeWin extends JFrame {
 				
 				final JButton button = new JButton(name);
 				button.setBounds(0 + 135*row , 50 + 60*col , 135 , 60);
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JDialog d = new JDialog(frame, "Add Item(s)", true);
+						d.setLayout( new FlowLayout(FlowLayout.LEADING) );  
+				        JButton b = new JButton ("Add");
+				        d.add( new JLabel ("Amount:"));  
+				        JTextField amount = new JTextField();
+				        amount.setColumns(10);
+				        
+				        b.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								if (numberCheck(amount.getText())) {
+									try {
+										calc.startSale();
+										calc.addItem(p, Integer.parseInt(amount.getText()));
+										d.setVisible(false);
+									} catch (NumberFormatException e1) {
+										e1.printStackTrace();
+									}
+								}
+							};
+						});
+				        
+				        d.add(amount);
+				        d.add(b);
+				        d.setSize(150,130);    
+				        d.setLocationRelativeTo(panel_1);
+				        d.setVisible(true);
+					};
+				});
 				panel_1.add(button);
 				row++;
 				if (row >= 4) {

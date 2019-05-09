@@ -45,6 +45,12 @@ public class InventoryList implements Serializable{
 			else
 				return null;
 		}
+
+		public void removeInventoryAmount(ReceiptItem ri) {
+			// TODO Auto-generated method stub
+			Product p = ri.getType();
+			p.removeInventoryAmount(ri.getAmount());
+		}
 		
 		
 }

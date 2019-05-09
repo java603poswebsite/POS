@@ -22,7 +22,11 @@ public class Register {
 		this.amountInRegister = startCash;
 		
 	};
-	
+	public Register(int registerId, double startCash) {
+		this.regId = registerId;
+		this.amountInRegister = startCash;
+		
+	};
 	
 	@XmlElement(name = "RegisterId")
 	public int getRegId() {

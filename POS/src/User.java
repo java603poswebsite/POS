@@ -26,6 +26,11 @@ public class User implements NameBinarySearch {
 		this.pw = pw;
 	}
 	
+	public User(String userName, String pw, int userId) {
+		this.userId = userId;
+		this.userName = userName;
+		this.pw = pw;
+	}
 	
 	
 	@XmlElement(name = "UserID")

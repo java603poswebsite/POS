@@ -86,6 +86,10 @@ public class Product implements Serializable, NameBinarySearch {
 	public void setSupplier(String supplier) {
 		this.supplier = supplier;
 }
+
+	public void removeInventoryAmount(int amount) {
+		this.inventory -= amount;
+	}
 	
 	
 	
