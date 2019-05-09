@@ -66,6 +66,14 @@
             <pIdent>997698</pIdent>
         </Product>
         <Product>
+            <Inventory>4</Inventory>
+            <Name>Light</Name>
+            <Price>4.0</Price>
+            <Supplier>Four</Supplier>
+            <Threshhold>4</Threshhold>
+            <pIdent>748837</pIdent>
+        </Product>
+        <Product>
             <Inventory>40</Inventory>
             <Name>newProduct</Name>
             <Price>7.0</Price>

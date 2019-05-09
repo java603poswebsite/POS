@@ -11,10 +11,13 @@ public class ListBinarySearch<T> {
 			return ri;
 		}
 		else if (indx <= 0) {
-			ri = null;
+			return ri = null;
 		}
-		else if (start == list.size()-1) {
-			ri = null;
+		else if (start >= list.size()-1) {
+			return ri = null;
+		}
+		else if (start == indx) {
+			return ri = null;
 		}
 		else if (indx > 0) {
 			int dir = productName.compareToIgnoreCase(name);
