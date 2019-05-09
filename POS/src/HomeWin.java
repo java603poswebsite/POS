@@ -67,7 +67,7 @@ public class HomeWin extends JFrame {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(176, 224, 230));
-		frame.setBounds(100, 100, 1020, 700);
+		frame.setBounds(100, 100, 1020, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		JPanel panel = new JPanel();
