@@ -1,11 +1,16 @@
+
+
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Window;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -74,6 +79,23 @@ public class Gui  {
 		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				String uname=textField.getText();
+				String pas=textField_1.getText();
+				if (uname.equals("name") && pas.equals("password"))
+						{
+					JOptionPane.showMessageDialog(frame, "you are sucessfully logged in");
+					HomeWin home = new HomeWin ();
+					((HomeWin) home).setVisible(true);
+					 
+					}
+				
+				else 
+				
+				{
+					
+					JOptionPane.showMessageDialog(frame, "Invalid username or password");
+				}
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -120,4 +142,3 @@ public class Gui  {
 		frame.getContentPane().setLayout(groupLayout);
 	}
 }
-
