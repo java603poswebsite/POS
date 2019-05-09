@@ -46,7 +46,11 @@ public class WriteFileTest {
 			//LocalDate date = LocalDate.parse(s);
 			//UserReceiptList receiptList = new UserReceiptList("Nikolai", 480574, 396432);
 			//UserReceiptList receiptlist = wrd.ReadReceiptList(396432, "2019-05-02", "Nikolai");
-			User u = ul.findUserByName("Nikolai");
+			User u = ul.findUserByName("Maria");
+			
+			if (u == null)
+				System.out.println("NULL");
+			
 			
 			UserReceiptList receiptlist = new UserReceiptList(u, 396432);
 			
@@ -73,7 +77,7 @@ public class WriteFileTest {
 			receiptlist.addReceipt(receipt);
 			
 			//wrd.writeInventoryList(il);
-			//wrd.writeReceipt(receiptlist);
+			wrd.writeReceipt(receiptlist);
 			//wrd.writeRegisterList(rl);
 			//wrd.writeUserList(ul);
 			//wrd.writeReceipt(receiptList);

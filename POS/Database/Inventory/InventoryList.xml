@@ -2,6 +2,14 @@
 <inventoryList>
     <Products>
         <Product>
+            <Inventory>20</Inventory>
+            <Name>AAA</Name>
+            <Price>40.0</Price>
+            <Supplier>AAA</Supplier>
+            <Threshhold>30</Threshhold>
+            <pIdent>34178</pIdent>
+        </Product>
+        <Product>
             <Inventory>6</Inventory>
             <Name>AmericanShorthair</Name>
             <Price>12.0</Price>
@@ -136,6 +144,14 @@
             <Supplier>Hobo</Supplier>
             <Threshhold>5</Threshhold>
             <pIdent>868184</pIdent>
+        </Product>
+        <Product>
+            <Inventory>7</Inventory>
+            <Name>Vince</Name>
+            <Price>9.0</Price>
+            <Supplier>Neo</Supplier>
+            <Threshhold>8</Threshhold>
+            <pIdent>4667</pIdent>
         </Product>
         <Product>
             <Inventory>12</Inventory>

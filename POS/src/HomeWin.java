@@ -425,7 +425,7 @@ public class HomeWin extends JFrame {
         {  
             public void actionPerformed( ActionEvent e )  
             {  
-                if (numberCheck(Inventory.getText()) && numberCheck(Threshhold.getText()) && numberCheck(Price.getText()) && prodName.getText().length() > 3) 
+                if (numberCheck(Inventory.getText()) && numberCheck(Threshhold.getText()) && numberCheck(Price.getText()) && prodName.getText().length() >= 3) 
             	{
                 	try {
 						Product p = new Product(prodName.getText(), Integer.parseInt(Inventory.getText()), Integer.parseInt(Threshhold.getText()), Double.parseDouble(Price.getText()), Supplier.getText() );

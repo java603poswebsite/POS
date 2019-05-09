@@ -117,7 +117,7 @@ public class ReceiptItem implements Serializable, NameBinarySearch {
 }
 	public void voidReceiptItem () {
 		this.isVoid = 1;
-		double prc = this.price * -1;
+		double prc = this.price;
 		int amt = this.amount * -1;
 		this.recpt.addReceiptItem(this.type, amt, prc, this.RIIdent);
 	}
