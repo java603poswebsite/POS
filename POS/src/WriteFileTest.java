@@ -45,8 +45,10 @@ public class WriteFileTest {
 			//String s = "2019-05-01";
 			//LocalDate date = LocalDate.parse(s);
 			//UserReceiptList receiptList = new UserReceiptList("Nikolai", 480574, 396432);
-			UserReceiptList receiptList = wrd.ReadReceiptList(396432, "2019-05-02", "Nikolai");
+			//UserReceiptList receiptlist = wrd.ReadReceiptList(396432, "2019-05-02", "Nikolai");
+			User u = ul.findUserByName("Nikolai");
 			
+			UserReceiptList receiptlist = new UserReceiptList(u, 396432);
 			
 			Product p4 = new Product("Cat", 3, 1, 200, "Minnesota");
 			Product p5 = new Product("Dog", 4, 1, 500, "Minnesota");
@@ -59,15 +61,19 @@ public class WriteFileTest {
 			Product p3 = il.findProductByName("CannedFood");
 			Product p8 = il.findProductByName("Dog");
 			
-			Receipt receipt = receiptList.getReceipt(899004);
-			receipt.addReceiptItem(p1);
-			receipt.addReceiptItem(p2);
-			receipt.addReceiptItem(p3);
+			Receipt receipt = new Receipt(396432, 35);
+			receipt.addReceiptItem(p1, 4);
+			receipt.addReceiptItem(p2, 6);
+			receipt.addReceiptItem(p3, 8);
+			receipt.findProductByName("Strawberry").voidReceiptItem();
 			
-			//receiptList.addReceipt(receipt);
+			ReceiptItem test = receipt.findProductByName("Strawberry");
+			
+			
+			receiptlist.addReceipt(receipt);
 			
 			//wrd.writeInventoryList(il);
-			//wrd.writeReceipt(receiptList);
+			wrd.writeReceipt(receiptlist);
 			//wrd.writeRegisterList(rl);
 			//wrd.writeUserList(ul);
 			//wrd.writeReceipt(receiptList);

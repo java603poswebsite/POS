@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -10,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 @XmlRootElement
-@XmlSeeAlso({Product.class})
+@XmlSeeAlso({ReceiptItem.class})
 public class Receipt implements Serializable {
 	/**
 	 * 
@@ -21,7 +22,7 @@ public class Receipt implements Serializable {
 	private int userId = 0;
 	private int receiptId = 0;
 	private String receiptName = "";
-	private List<Product> items = new LinkedList<Product>();
+	private List<ReceiptItem> items = new LinkedList<ReceiptItem>();
 	
 	public Receipt(int regId, int userId) {
 		this.registerId = regId;
@@ -86,13 +87,23 @@ public class Receipt implements Serializable {
     }
 	
     @XmlElementWrapper(name = "items")
-    @XmlElement(name = "product")
-    public List<Product> getItems() {
+    @XmlElement(name = "ReceiptItems")
+    public List<ReceiptItem> getItems() {
         return items;
     }
     
-    public void addReceiptItem(Product p) {
-    	this.items.add(p);
+    public void addReceiptItem(ReceiptItem ri) {
+    	this.items.add(ri);
+    }
+    
+    public void addReceiptItem(Product type, int amount) {
+    	ReceiptItem ri = new ReceiptItem(this, type, amount);
+    	this.items.add(ri);
+    }
+    
+    public void addReceiptItem(Product type, int amount, double price, int ident) {
+    	ReceiptItem ri = new ReceiptItem(this, type, amount, price, ident);
+    	this.items.add(ri);
     }
 
 	public void removeReceiptItem(Product p) {
@@ -100,5 +111,17 @@ public class Receipt implements Serializable {
 	}
 	
 	
+	public ReceiptItem findProductByName(String productName) {
+		ListBinarySearch<ReceiptItem> search = new ListBinarySearch<ReceiptItem>();
+		ReceiptItem ri = (ReceiptItem) search.BinarySearchName(productName, 0, items.size()-1, items);
+		if (ri != null)
+			return ri;
+		else
+			return null;
+	}
+	
+
+	
 	
 }
+

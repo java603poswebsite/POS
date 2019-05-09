@@ -36,41 +36,14 @@ public class InventoryList implements Serializable{
 			products.remove(p);
 		}
 		
+		
 		public Product findProductByName(String productName) {
-			Product prod = BinarySearchName(productName, 0, products.size());
+			ListBinarySearch<Product> search = new ListBinarySearch<Product>();
+			Product prod = (Product) search.BinarySearchName(productName, 0, products.size()-1, products);
 			if (prod != null)
 				return prod;
 			else
 				return null;
-		}
-		
-		
-		private Product BinarySearchName(String productName, int start, int end) {
-			int indx = ((end - start) / 2) + start;
-			Product prod = products.get(indx);
-			if (prod.getName().compareToIgnoreCase(productName) == 0) {
-				return prod;
-			}
-			
-			else if (indx > 0) {
-				int dir = productName.compareToIgnoreCase(prod.getName());
-				if (dir > 1) {
-					prod = BinarySearchName(productName, indx, end);
-				}
-				else if (dir < 1 && end != 1) {
-					prod = BinarySearchName(productName, 0, indx);
-				}
-				else if (end == 1) {
-					prod = BinarySearchName(productName, 0, 0);
-				}
-			}
-			else if (indx <= 0) {
-				prod = null;
-			}
-			else if (start == end) {
-				prod = null;
-			}
-			return prod;
 		}
 		
 		

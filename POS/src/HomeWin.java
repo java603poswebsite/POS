@@ -394,11 +394,11 @@ public class HomeWin extends JFrame {
                 	try {
 						Product p = new Product(prodName.getText(), Integer.parseInt(Inventory.getText()), Integer.parseInt(Threshhold.getText()), Double.parseDouble(Price.getText()), Supplier.getText() );
 						InventoryList invList = database.ReadInventoryList();
-						//if (invList.findProductByName(p.getName()) == null && p.getName() != null) {
+						if (invList.findProductByName(p.getName()) == null && p.getName() != null) {
 							invList.addProduct(p);
 							database.writeInventoryList(invList);
 							inventoryButtons(panel);
-						//}
+						}
 					d.setVisible(false);
 					} catch (NumberFormatException e1) {
 						e1.printStackTrace();

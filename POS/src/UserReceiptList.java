@@ -20,10 +20,10 @@ public class UserReceiptList {
 		this.date = LocalDate.now().toString();
 	}
 	
-	public UserReceiptList(String userName, int userId, int registerId) {
+	public UserReceiptList(User user, int registerId) {
 		this.date = LocalDate.now().toString();
-		this.userName = userName;
-		this.userId = userId;
+		this.userName = user.getUserName();
+		this.userId = user.getUserId();
 		this.registerId = registerId;
 	}
 	

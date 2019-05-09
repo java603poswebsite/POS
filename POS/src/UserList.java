@@ -33,4 +33,13 @@ public class UserList implements Serializable{
 			users.remove(u);
 		}
 	}
+	
+	public User findUserByName(String userName) {
+		ListBinarySearch<User> search = new ListBinarySearch<User>();
+		User user = (User) search.BinarySearchName(userName, 0, users.size()-1, users);
+		if (user != null)
+			return user;
+		else
+			return null;
+	}
 }

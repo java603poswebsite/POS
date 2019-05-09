@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @XmlRootElement
-public class User {
+public class User implements NameBinarySearch {
 	private int userId = 0;
 	private String userName = "";
 	private String pw = "";
@@ -57,4 +57,10 @@ public class User {
 		public void setPW(String pw) {
 			this.pw = pw;
 	}
+
+
+		@Override
+		public String getName() {
+			return userName;
+		}
 }
