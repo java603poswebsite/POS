@@ -19,23 +19,17 @@ public class ListBinarySearch<T> {
 				if (name.compareToIgnoreCase(productName) == 0) {
 					return ri;
 				}
-				else return null;
+				else ri = null;
 			}
-			else if (indx <= 0) {
-				return ri = null;
+			else if (start == indx || start >= list.size()-1 || indx <= 0 || indx >= list.size() - 1) {
+				ri = null;
 			}
-			else if (start >= list.size()-1) {
-				return ri = null;
-			}
-			else if (start == indx) {
-				return ri = null;
-			}
-			else if (indx > 0) {
+			else if (indx > 0 && indx < list.size()-1) {
 				int dir = productName.compareToIgnoreCase(name);
-				if (dir > 1) {
-					ri = BinarySearchName(productName, indx+1, end, list);
+				if (dir > 0) {
+					ri = BinarySearchName(productName, indx, end, list);
 				}
-				else if (dir < 1 && end != 1) {
+				else if (dir < 0 && end != 1) {
 					ri = BinarySearchName(productName, 0, indx, list);
 				}
 				else if (end == 1) {
