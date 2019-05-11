@@ -66,6 +66,14 @@
             <pIdent>395651</pIdent>
         </Product>
         <Product>
+            <Inventory>10</Inventory>
+            <Name>Fox</Name>
+            <Price>7.0</Price>
+            <Supplier>Japan</Supplier>
+            <Threshhold>5</Threshhold>
+            <pIdent>171939</pIdent>
+        </Product>
+        <Product>
             <Inventory>50</Inventory>
             <Name>Hair</Name>
             <Price>5.0</Price>
@@ -154,6 +162,14 @@
             <pIdent>4667</pIdent>
         </Product>
         <Product>
+            <Inventory>20</Inventory>
+            <Name>Walrus</Name>
+            <Price>5.0</Price>
+            <Supplier>North</Supplier>
+            <Threshhold>20</Threshhold>
+            <pIdent>729518</pIdent>
+        </Product>
+        <Product>
             <Inventory>12</Inventory>
             <Name>White</Name>
             <Price>12.0</Price>
@@ -168,6 +184,14 @@
             <Supplier>Zoo</Supplier>
             <Threshhold>5</Threshhold>
             <pIdent>991732</pIdent>
+        </Product>
+        <Product>
+            <Inventory>20</Inventory>
+            <Name>ZZZ</Name>
+            <Price>5.0</Price>
+            <Supplier>North</Supplier>
+            <Threshhold>20</Threshhold>
+            <pIdent>717343</pIdent>
         </Product>
     </Products>
 </inventoryList>

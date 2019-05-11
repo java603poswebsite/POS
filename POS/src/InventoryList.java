@@ -39,7 +39,7 @@ public class InventoryList implements Serializable{
 		
 		public Product findProductByName(String productName) {
 			ListBinarySearch<Product> search = new ListBinarySearch<Product>();
-			Product prod = (Product) search.BinarySearchName(productName, 0, products.size()-1, products);
+			Product prod = (Product) search.BinarySearchName(productName, 0, products.size(), products);
 			if (prod != null)
 				return prod;
 			else
