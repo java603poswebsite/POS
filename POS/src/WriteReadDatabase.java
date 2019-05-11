@@ -6,6 +6,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
 public class WriteReadDatabase {
+	public static void main(String[] args) {}
 	public void writeReceipt(UserReceiptList r) {
 		Path currentRelativePath = Paths.get(""); 
 		String s = currentRelativePath.toAbsolutePath().toString();

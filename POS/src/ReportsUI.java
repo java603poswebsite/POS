@@ -263,12 +263,19 @@ public class ReportsUI extends Gui {
 	}
 	void printC() throws Exception {
 		WriteReadDatabase w = new WriteReadDatabase();
-		reportArea.setText("User receipt list report: " +w.ReadReceiptList(2019-05-02, 396432, Nikolai));//w.ReadUserList().getClass().getSimpleName());
+		//reportArea.setText("User receipt list report: " +w.ReadReceiptList(2019-05-02, 396432, Nikolai));//w.ReadUserList().getClass().getSimpleName());
 	}
 	void printR() throws Exception {
 		WriteReadDatabase w = new WriteReadDatabase();
 
 		reportArea.setText("Register day report: " +w.ReadReceiptList(2019-05-02, null, null).getClass().getSimpleName());
+	}
+
+
+
+	public void setVisible(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

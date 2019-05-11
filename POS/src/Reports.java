@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 public class Reports extends JFrame {
 
 	private JPanel contentPane;
+
 	/**
 	 * Launch the application.hello
 	 */
@@ -15,7 +16,7 @@ public class Reports extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Reports frame = new Reports();
+					ReportsUI frame = new ReportsUI();
 					frame.setVisible(true);
 				
 				} catch (Exception e) {
@@ -38,3 +39,6 @@ public class Reports extends JFrame {
 	}
 
 }
+
+
+////
