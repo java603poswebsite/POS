@@ -23,6 +23,9 @@ public class Receipt implements Serializable {
 	private int receiptId = 0;
 	private String receiptName = "";
 	private List<ReceiptItem> items = new LinkedList<ReceiptItem>();
+	private int size = 0;
+	private double Total = 0;
+	private double tax = 0;
 	
 	public Receipt(int regId, int userId) {
 		this.registerId = regId;
@@ -99,11 +102,15 @@ public class Receipt implements Serializable {
     public void addReceiptItem(Product type, int amount) {
     	ReceiptItem ri = new ReceiptItem(this, type, amount);
     	this.items.add(ri);
+    	amountSize(amount);
+    	amountTotal(amount*type.getPrice());
     }
     
     public void addReceiptItem(Product type, int amount, double price, int ident) {
     	ReceiptItem ri = new ReceiptItem(this, type, amount, price, ident);
     	this.items.add(ri);
+    	amountSize(amount);
+    	amountTotal(amount*price);
     }
 
 	public void removeReceiptItem(Product p) {
@@ -120,7 +127,41 @@ public class Receipt implements Serializable {
 			return null;
 	}
 	
-
+	@XmlElement(name = "Total")
+    public void setTotal(double tot) {
+        this.Total = tot;
+    }
+	
+	public double getTotal() {
+        return this.Total;
+    }
+	
+	@XmlElement(name = "size")
+    public void setSize(int sz) {
+        this.size = sz;
+    }
+	
+	public int getSize() {
+        return this.size;
+    }
+	
+	public void amountSize(int amount) {
+        this.size+=amount;
+    }
+	
+	public void amountTotal(double amount) {
+        this.Total+=amount;
+    }
+	
+	
+	@XmlElement(name = "Tax")
+    public void setTax(double tax) {
+        this.tax = tax;
+    }
+	
+	public double getTax() {
+        return this.tax;
+    }
 	
 	
 }
