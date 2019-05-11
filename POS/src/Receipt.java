@@ -97,6 +97,8 @@ public class Receipt implements Serializable {
     
     public void addReceiptItem(ReceiptItem ri) {
     	this.items.add(ri);
+    	amountSize(ri.getAmount());
+    	amountTotal(ri.getAmount()*ri.getType().getPrice());
     }
     
     public void addReceiptItem(Product type, int amount) {

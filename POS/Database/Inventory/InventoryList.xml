@@ -2,7 +2,7 @@
 <inventoryList>
     <Products>
         <Product>
-            <Inventory>20</Inventory>
+            <Inventory>5</Inventory>
             <Name>AAA</Name>
             <Price>40.0</Price>
             <Supplier>AAA</Supplier>
@@ -58,7 +58,7 @@
             <pIdent>256706</pIdent>
         </Product>
         <Product>
-            <Inventory>4</Inventory>
+            <Inventory>1</Inventory>
             <Name>Dog</Name>
             <Price>500.0</Price>
             <Supplier>Minnesota</Supplier>
@@ -106,7 +106,7 @@
             <pIdent>339154</pIdent>
         </Product>
         <Product>
-            <Inventory>5</Inventory>
+            <Inventory>2</Inventory>
             <Name>Persian</Name>
             <Price>3.0</Price>
             <Supplier>RichGuy</Supplier>
@@ -178,7 +178,7 @@
             <pIdent>772557</pIdent>
         </Product>
         <Product>
-            <Inventory>20</Inventory>
+            <Inventory>15</Inventory>
             <Name>Zeebra</Name>
             <Price>3.0</Price>
             <Supplier>Zoo</Supplier>

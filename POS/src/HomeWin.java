@@ -118,6 +118,11 @@ public class HomeWin extends JFrame {
 		textField_5.setColumns(10);
 		
 		JButton btnConfirmTransaction = new JButton("Confirm Transaction");
+		btnConfirmTransaction.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				calc.finishSale();
+			}
+		});
 		
 		JDesktopPane desktopPane = new JDesktopPane();
 		

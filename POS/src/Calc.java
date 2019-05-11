@@ -54,13 +54,27 @@ public class Calc {
 	
 	// Method for finishing a sale.
 	public void finishSale() {
-		allSales.addReceipt(sale);
 		
-		// Update master inventory.	
-		for(ReceiptItem ri : sale.getItems()) {
-			masterInventory.removeInventoryAmount(ri);
+		try {
+			allSales.addReceipt(sale);
+			
+			// Update master inventory.	
+			InventoryList inv = dbService.ReadInventoryList();
+			UserReceiptList rcptList = dbService.ReadReceiptList(pos.getRegId(), sale.getDate(), user.getName());
+			List<ReceiptItem> items = sale.getItems();
+			for(ReceiptItem ri : items) {
+				Product DBItem = inv.findProductByName(ri.getType().getName());
+				DBItem.removeInventoryAmount(ri.getAmount());
+			}
+			dbService.writeInventoryList(inv);
+			rcptList.addReceipt(sale);
+			dbService.writeReceipt(rcptList);
+			sale = null;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		sale = null;
 	}
 	
 	// Method for returning individual items.
@@ -99,8 +113,11 @@ public class Calc {
 			for (ReceiptItem ri : ril) {
 			ReceiptDisplay.setText(ReceiptDisplay.getText() + ri.getName() + ", qty: " + ri.getAmount() + ", $" + ri.getPrice() + " = $" + (ri.getAmount() * ri.getPrice())+"\n");
 			}
+			
 		}
-		
+		else {
+				ReceiptDisplay.setText("");
+			}
 	}
 	
 	
