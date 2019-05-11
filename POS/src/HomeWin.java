@@ -362,6 +362,7 @@ public class HomeWin extends JFrame {
 				        JTextField amount = new JTextField();
 				        amount.setColumns(10);
 				        
+				        // Event handler for calc actions
 				        b.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								if (numberCheck(amount.getText())) {
