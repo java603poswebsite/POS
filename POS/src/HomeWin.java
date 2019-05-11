@@ -76,6 +76,7 @@ public class HomeWin extends JFrame {
 		frame.setBounds(100, 100, 1020, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
 		JPanel panel = new JPanel();
 		dispose();
 		panel.setBackground(Color.DARK_GRAY);
@@ -286,14 +287,13 @@ public class HomeWin extends JFrame {
 		JButton btnReports = new JButton("Reports");
 		btnReports.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				//Reports repo = new Reports ();
-				//repo.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				Reports repo = new Reports ();
+				repo.setVisible(true);
 			}
 		});
 		menuBar.add(btnReports);
-		//Reports repo = new Reports();
-		//((Reports) repo).setVisible(true);
+		
 		
 		JButton btnRegisters = new JButton("Registers");
 		menuBar.add(btnRegisters);
@@ -362,6 +362,7 @@ public class HomeWin extends JFrame {
 				        JTextField amount = new JTextField();
 				        amount.setColumns(10);
 				        
+				        // Event handler for calc actions
 				        b.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								if (numberCheck(amount.getText())) {

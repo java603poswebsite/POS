@@ -27,6 +27,12 @@ public class UserReceiptList {
 		this.registerId = registerId;
 	}
 	
+	public UserReceiptList(String userName, int registerId) {
+		this.date = LocalDate.now().toString();
+		this.userName = userName;
+		this.registerId = registerId;
+	}
+	
 	
 	@XmlElementWrapper(name = "Receipts")
     @XmlElement(name = "Receipt")

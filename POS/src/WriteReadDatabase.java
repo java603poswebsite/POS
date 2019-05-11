@@ -132,11 +132,18 @@ public class WriteReadDatabase {
 	public UserReceiptList ReadReceiptList (int registerId, String date, String userName) throws Exception {
 		Path currentRelativePath = Paths.get(""); 
 		String s = currentRelativePath.toAbsolutePath().toString();
+		UserReceiptList rcptList = null;
 		File file = new File(s+ "\\Database\\" + registerId + "\\" + date + "\\" + userName +"\\" +date + userName + ".xml");
-        JAXBContext jaxbContext = JAXBContext.newInstance(UserReceiptList.class);
-
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        return (UserReceiptList) jaxbUnmarshaller.unmarshal(file);
+		boolean exists = file.exists();
+		if (exists) {
+			JAXBContext jaxbContext = JAXBContext.newInstance(UserReceiptList.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			rcptList = (UserReceiptList) jaxbUnmarshaller.unmarshal(file);
+		}
+		else {
+			rcptList = new UserReceiptList(userName, registerId);
+					}
+		return rcptList;
 	}
 	
 }
