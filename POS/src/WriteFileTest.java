@@ -45,8 +45,15 @@ public class WriteFileTest {
 			//String s = "2019-05-01";
 			//LocalDate date = LocalDate.parse(s);
 			//UserReceiptList receiptList = new UserReceiptList("Nikolai", 480574, 396432);
+<<<<<<< HEAD
 			UserReceiptList receiptList = wrd.ReadReceiptList(396432, "2019-05-02", "Nikolai");
 			
+=======
+			//UserReceiptList receiptlist = wrd.ReadReceiptList(396432, "2019-05-02", "Nikolai");
+			User u = ul.findUserByName("Nikolai");
+			
+			UserReceiptList receiptlist = new UserReceiptList(u, 396432);
+>>>>>>> parent of 767ead1... Further testing and binary search changes
 			
 			Product p4 = new Product("Cat", 3, 1, 200, "Minnesota");
 			Product p5 = new Product("Dog", 4, 1, 500, "Minnesota");
@@ -67,7 +74,11 @@ public class WriteFileTest {
 			//receiptList.addReceipt(receipt);
 			
 			//wrd.writeInventoryList(il);
+<<<<<<< HEAD
 			//wrd.writeReceipt(receiptList);
+=======
+			//wrd.writeReceipt(receiptlist);
+>>>>>>> parent of 767ead1... Further testing and binary search changes
 			//wrd.writeRegisterList(rl);
 			//wrd.writeUserList(ul);
 			//wrd.writeReceipt(receiptList);

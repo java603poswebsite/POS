@@ -2,6 +2,33 @@
 <inventoryList>
     <Products>
         <Product>
+<<<<<<< HEAD
+=======
+            <Inventory>6</Inventory>
+            <Name>AmericanShorthair</Name>
+            <Price>12.0</Price>
+            <Supplier>USA</Supplier>
+            <Threshhold>3</Threshhold>
+            <pIdent>67571</pIdent>
+        </Product>
+        <Product>
+            <Inventory>10</Inventory>
+            <Name>Apple</Name>
+            <Price>3.0</Price>
+            <Supplier>UoM</Supplier>
+            <Threshhold>5</Threshhold>
+            <pIdent>75092</pIdent>
+        </Product>
+        <Product>
+            <Inventory>60</Inventory>
+            <Name>Blue</Name>
+            <Price>30.0</Price>
+            <Supplier>Ocean</Supplier>
+            <Threshhold>10</Threshhold>
+            <pIdent>635707</pIdent>
+        </Product>
+        <Product>
+>>>>>>> parent of 767ead1... Further testing and binary search changes
             <Inventory>10</Inventory>
             <Name>CannedFood</Name>
             <Price>2.5</Price>
@@ -41,5 +68,32 @@
             <Threshhold>3</Threshhold>
             <pIdent>62949</pIdent>
         </Product>
+<<<<<<< HEAD
+=======
+        <Product>
+            <Inventory>20</Inventory>
+            <Name>Tabby</Name>
+            <Price>30.0</Price>
+            <Supplier>Hobo</Supplier>
+            <Threshhold>5</Threshhold>
+            <pIdent>868184</pIdent>
+        </Product>
+        <Product>
+            <Inventory>12</Inventory>
+            <Name>White</Name>
+            <Price>12.0</Price>
+            <Supplier>White</Supplier>
+            <Threshhold>12</Threshhold>
+            <pIdent>772557</pIdent>
+        </Product>
+        <Product>
+            <Inventory>20</Inventory>
+            <Name>Zeebra</Name>
+            <Price>3.0</Price>
+            <Supplier>Zoo</Supplier>
+            <Threshhold>5</Threshhold>
+            <pIdent>991732</pIdent>
+        </Product>
+>>>>>>> parent of 767ead1... Further testing and binary search changes
     </Products>
 </inventoryList>
