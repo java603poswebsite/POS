@@ -75,6 +75,24 @@ public class HomeWin extends JFrame {
 		this.cashReceived = 0.0;
 		this.cashChange = 0.0;
 	}
+	
+	private void homeWinReset() {
+		
+		// Clear text fields after finishing a sale.
+		taxField.setText("");
+		subtotalField.setText("");
+		totalField.setText("");
+		amountReceivedField.setText("");
+		totalChangeField.setText("");
+		receiptBox.setText("");
+		
+		// Reset values after finishing a sale.
+		tax = 0.0;
+		subTotal = 0.0;
+		total = 0.0;
+		cashReceived = 0.0;
+		cashChange = 0.0;
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -92,7 +110,12 @@ public class HomeWin extends JFrame {
 		
 		JLabel lblTotal = new JLabel("Total:");
 		
-		JButton btnCalcelOrder = new JButton("Cancel Order");
+		JButton btnCancelOrder = new JButton("Cancel Order");
+		btnCancelOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				homeWinReset();
+			};
+		});
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 255, 255));
@@ -157,13 +180,8 @@ public class HomeWin extends JFrame {
 					JOptionPane.showMessageDialog(frame, "Insufficient payment.");
 					return;
 				}
-				calc.finishSale();
-				taxField.setText("");
-				subtotalField.setText("");
-				totalField.setText("");
-				amountReceivedField.setText("");
-				totalChangeField.setText("");
-				receiptBox.setText("");
+				calc.finishSale();			
+				homeWinReset();		
 				JOptionPane.showMessageDialog(frame, "Sale complete.");
 			}
 		});
@@ -193,7 +211,7 @@ public class HomeWin extends JFrame {
 										.addComponent(taxField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(subtotalField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 									.addPreferredGap(ComponentPlacement.RELATED))
-								.addComponent(btnCalcelOrder))
+								.addComponent(btnCancelOrder))
 							.addGap(18)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
@@ -254,7 +272,7 @@ public class HomeWin extends JFrame {
 									.addComponent(btnConfirmTransaction))
 								.addGap(18)
 								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-									.addComponent(btnCalcelOrder)
+									.addComponent(btnCancelOrder)
 									.addComponent(totalChangeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addComponent(lblTotalChange)))))
 					.addGap(8))
