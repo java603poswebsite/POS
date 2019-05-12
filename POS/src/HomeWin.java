@@ -1,39 +1,36 @@
 
 
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-
-import javax.swing.JFrame;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
 import java.awt.Color;
 import java.awt.Container;
-
-import javax.swing.JTextPane;
+import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import javax.swing.JMenuBar;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.awt.event.ActionEvent;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class HomeWin extends JFrame {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextArea textField_3 = new JTextArea();
+	private JTextField taxField;
+	private JTextField subtotalField;
+	private JTextField totalField;
+	private JTextArea receiptBox = new JTextArea();									// Receipt text field box
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private Container jDesktopPanel;
@@ -41,7 +38,11 @@ public class HomeWin extends JFrame {
 	private Register register = new Register(396432, 1000.0);
 	private WriteReadDatabase database = new WriteReadDatabase();
 	//private Receipt receipt = new Receipt(396432, 35); // placeholder until we get real credentials in here
-	private Calc calc = new Calc(user, register, textField_3);
+	private Calc calc = new Calc(user, register, receiptBox);
+	
+	private double tax;
+	private double subTotal;
+	private double total;
 	
 	/**
 	 * Launch the application.hello
@@ -65,6 +66,9 @@ public class HomeWin extends JFrame {
 	 */
 	public HomeWin() {
 		initialize();
+		this.tax = 0.0;
+		this.subTotal = 0.0;
+		this.subTotal = 0.0;
 	}
 
 	/**
@@ -92,17 +96,21 @@ public class HomeWin extends JFrame {
 		
 		JLabel lblTax = new JLabel("Tax:");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		// Tax text field
+		taxField = new JTextField();
+		taxField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		// Sub-total text field
+		subtotalField = new JTextField();
+		subtotalField.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		// Total text field
+		totalField = new JTextField();
+		totalField.setColumns(10);
 		
-		textField_3.setLineWrap(true);
-		textField_3.setColumns(10);
+		// Receipt text field box
+		receiptBox.setLineWrap(true);
+		receiptBox.setColumns(10);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.DARK_GRAY);
@@ -145,9 +153,9 @@ public class HomeWin extends JFrame {
 										.addComponent(lblTotal, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
 									.addGap(18)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addComponent(totalField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(taxField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(subtotalField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 									.addPreferredGap(ComponentPlacement.RELATED))
 								.addComponent(btnCalcelOrder))
 							.addGap(18)
@@ -167,7 +175,7 @@ public class HomeWin extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(textField_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
+								.addComponent(receiptBox, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
 							.addComponent(desktopPane_1, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)))
 					.addGap(18)
@@ -189,24 +197,24 @@ public class HomeWin extends JFrame {
 									.addGroup(groupLayout.createSequentialGroup()
 										.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
+										.addComponent(receiptBox, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
 										.addGap(11)
 										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 											.addComponent(lblTax)
-											.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+											.addComponent(taxField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 									.addGroup(groupLayout.createSequentialGroup()
 										.addGap(17)
 										.addComponent(desktopPane_1, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)))
 								.addGap(12)
 								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 									.addComponent(lblSubtotal)
-									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(subtotalField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addComponent(lblAmountReceived)
 									.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 								.addGap(12)
 								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 									.addComponent(lblTotal)
-									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(totalField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addComponent(btnConfirmTransaction))
 								.addGap(18)
 								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
@@ -375,6 +383,16 @@ public class HomeWin extends JFrame {
 										calc.startSale();
 										calc.addItem(p, Integer.parseInt(amount.getText()));
 										d.setVisible(false);
+										
+										int quantity = Integer.parseInt(amount.getText());
+										tax += 0.075 * p.getPrice() * quantity;
+										subTotal += p.getPrice() * quantity;
+										total = tax + subTotal;
+						
+										taxField.setText(Double.toString(tax));
+										subtotalField.setText(Double.toString(subTotal));
+										totalField.setText(Double.toString(total));
+										
 									} catch (NumberFormatException e1) {
 										e1.printStackTrace();
 									}
