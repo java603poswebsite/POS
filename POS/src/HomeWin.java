@@ -18,6 +18,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -31,8 +32,8 @@ public class HomeWin extends JFrame {
 	private JTextField subtotalField;
 	private JTextField totalField;
 	private JTextArea receiptBox = new JTextArea();									// Receipt text field box
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField amountReceivedField;
+	private JTextField totalChangeField;
 	private Container jDesktopPanel;
 	private User user = new User("Nikolai", "12345", 35);
 	private Register register = new Register(396432, 1000.0);
@@ -43,6 +44,8 @@ public class HomeWin extends JFrame {
 	private double tax;
 	private double subTotal;
 	private double total;
+	private double cashReceived;
+	private double cashChange;
 	
 	/**
 	 * Launch the application.hello
@@ -69,6 +72,8 @@ public class HomeWin extends JFrame {
 		this.tax = 0.0;
 		this.subTotal = 0.0;
 		this.subTotal = 0.0;
+		this.cashReceived = 0.0;
+		this.cashChange = 0.0;
 	}
 
 	/**
@@ -99,14 +104,17 @@ public class HomeWin extends JFrame {
 		// Tax text field
 		taxField = new JTextField();
 		taxField.setColumns(10);
+		taxField.setEditable(false);
 		
 		// Sub-total text field
 		subtotalField = new JTextField();
 		subtotalField.setColumns(10);
+		subtotalField.setEditable(false);
 		
 		// Total text field
 		totalField = new JTextField();
 		totalField.setColumns(10);
+		totalField.setEditable(false);
 		
 		// Receipt text field box
 		receiptBox.setLineWrap(true);
@@ -117,13 +125,26 @@ public class HomeWin extends JFrame {
 		
 		JLabel lblAmountReceived = new JLabel("Amount received $:");
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
+		// Amount received text field
+		amountReceivedField = new JTextField();
+		amountReceivedField.setColumns(10);
+		amountReceivedField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cashReceived = Double.parseDouble(amountReceivedField.getText());
+				cashChange = cashReceived - total;
+				if(cashChange < 0.0) {
+					JOptionPane.showMessageDialog(frame, "Insufficient payment.");
+				}
+				totalChangeField.setText(Double.toString(cashChange));
+			};
+		});
 		
 		JLabel lblTotalChange = new JLabel("Total change $:");
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
+		// Total change text field
+		totalChangeField = new JTextField();
+		totalChangeField.setColumns(10);
+		totalChangeField.setEditable(false);
 		
 		JButton btnConfirmTransaction = new JButton("Confirm Transaction");
 		btnConfirmTransaction.addActionListener(new ActionListener() {
@@ -163,11 +184,11 @@ public class HomeWin extends JFrame {
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblAmountReceived)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+									.addComponent(amountReceivedField, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblTotalChange, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textField_5, 0, 0, Short.MAX_VALUE))
+									.addComponent(totalChangeField, 0, 0, Short.MAX_VALUE))
 								.addComponent(btnConfirmTransaction)))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(13)
@@ -210,7 +231,7 @@ public class HomeWin extends JFrame {
 									.addComponent(lblSubtotal)
 									.addComponent(subtotalField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addComponent(lblAmountReceived)
-									.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addComponent(amountReceivedField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 								.addGap(12)
 								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 									.addComponent(lblTotal)
@@ -219,7 +240,7 @@ public class HomeWin extends JFrame {
 								.addGap(18)
 								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 									.addComponent(btnCalcelOrder)
-									.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(totalChangeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addComponent(lblTotalChange)))))
 					.addGap(8))
 		);
@@ -391,9 +412,9 @@ public class HomeWin extends JFrame {
 						
 										taxField.setText(Double.toString(tax));
 										subtotalField.setText(Double.toString(subTotal));
-										totalField.setText(Double.toString(total));
-										
-									} catch (NumberFormatException e1) {
+										totalField.setText(Double.toString(total));									
+									} 
+									catch (NumberFormatException e1) {
 										e1.printStackTrace();
 									}
 								}
