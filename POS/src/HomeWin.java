@@ -149,7 +149,22 @@ public class HomeWin extends JFrame {
 		JButton btnConfirmTransaction = new JButton("Confirm Transaction");
 		btnConfirmTransaction.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(totalChangeField.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "Please add items and payment.");
+					return;
+				}
+				else if(cashChange < 0.0) {
+					JOptionPane.showMessageDialog(frame, "Insufficient payment.");
+					return;
+				}
 				calc.finishSale();
+				taxField.setText("");
+				subtotalField.setText("");
+				totalField.setText("");
+				amountReceivedField.setText("");
+				totalChangeField.setText("");
+				receiptBox.setText("");
+				JOptionPane.showMessageDialog(frame, "Sale complete.");
 			}
 		});
 		
