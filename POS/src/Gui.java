@@ -7,7 +7,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import java.awt.Font;
-import java.awt.Window;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -20,9 +19,7 @@ public class Gui  {
 	private JPasswordField passwordField;
 	private JTextField textField;
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -36,16 +33,12 @@ public class Gui  {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	
 	public Gui() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
@@ -76,9 +69,6 @@ public class Gui  {
 	
 				String uname= textField.getText();
 				String pas= passwordField.getText();
-				
-				
-				
 				
 				
 				
@@ -151,4 +141,3 @@ public class Gui  {
 		frame.getContentPane().setLayout(groupLayout);
 	}
 }
-////////
