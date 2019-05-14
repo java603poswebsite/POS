@@ -279,6 +279,9 @@ public class Gui  {
 							else if (preExistingUser.getName() == uname) {
 								JOptionPane.showMessageDialog(frame, "UserName already exists.");
 							}
+							else if (!pas.equals(newpas)) {
+								JOptionPane.showMessageDialog(frame, "Passwords don't match.");
+							}
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

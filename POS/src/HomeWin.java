@@ -40,6 +40,7 @@ public class HomeWin extends JFrame {
 	private WriteReadDatabase database = new WriteReadDatabase();
 	//private Receipt receipt = new Receipt(396432, 35); // placeholder until we get real credentials in here
 	private Calc calc = new Calc(user, register, receiptBox);
+	private JPanel panel_1 = new JPanel();
 	
 	private double tax;
 	private double subTotal;
@@ -117,7 +118,7 @@ public class HomeWin extends JFrame {
 			};
 		});
 		
-		JPanel panel_1 = new JPanel();
+		panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 255, 255));
 		
 		JLabel lblSubtotal = new JLabel("Subtotal:");
@@ -417,7 +418,7 @@ public class HomeWin extends JFrame {
 			int row = 0;
 			int col = 0;
 			for (Product p : prod) {
-				String name = p.getName();
+				String name = p.getName() + " ("+p.getInventory() + ")";
 				
 				final JButton button = new JButton(name);
 				button.setBounds(0 + 135*row , 50 + 60*col , 135 , 60);
@@ -429,12 +430,14 @@ public class HomeWin extends JFrame {
 				        d.add( new JLabel ("Amount:"));  
 				        JTextField amount = new JTextField();
 				        amount.setColumns(10);
+				        JButton reStock = new JButton ("restock");
 				        
 				        // Event handler for calc actions
 				        b.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								if (numberCheck(amount.getText())) {
 									try {
+										if (Integer.parseInt(amount.getText()) < p.getInventory()) {
 										calc.startSale();
 										calc.addItem(p, Integer.parseInt(amount.getText()));
 										d.setVisible(false);
@@ -446,7 +449,11 @@ public class HomeWin extends JFrame {
 						
 										taxField.setText(Double.toString(tax));
 										subtotalField.setText(Double.toString(subTotal));
-										totalField.setText(Double.toString(total));									
+										totalField.setText(Double.toString(total));
+										}
+										else {
+											JOptionPane.showMessageDialog(frame, "Not Enough Inventory.");
+										}
 									} 
 									catch (NumberFormatException e1) {
 										e1.printStackTrace();
@@ -455,9 +462,33 @@ public class HomeWin extends JFrame {
 							};
 						});
 				        
+				        reStock.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								if (numberCheck(amount.getText())) {
+									try {
+										InventoryList invList = database.ReadInventoryList();
+										Product invP = invList.findProductByName(p.getName());
+										if ( invP != null) {
+											invP.addInventoryAmount(Integer.parseInt(amount.getText()));;
+											database.writeInventoryList(invList);
+											inventoryButtons(panel_1);
+											d.setVisible(false);
+										}
+									} 
+									catch (NumberFormatException e1) {
+										e1.printStackTrace();
+									} catch (Exception e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+							};
+						});
+				        
 				        d.add(amount);
 				        d.add(b);
-				        d.setSize(150,130);    
+				        d.add(reStock);
+				        d.setSize(180,130);    
 				        d.setLocationRelativeTo(panel_1);
 				        d.setVisible(true);
 					};

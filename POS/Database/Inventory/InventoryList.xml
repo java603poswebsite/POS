@@ -42,7 +42,7 @@
             <pIdent>429562</pIdent>
         </Product>
         <Product>
-            <Inventory>20</Inventory>
+            <Inventory>25</Inventory>
             <Name>Carrots</Name>
             <Price>5.0</Price>
             <Supplier>bugsbunny</Supplier>
@@ -66,7 +66,7 @@
             <pIdent>395651</pIdent>
         </Product>
         <Product>
-            <Inventory>10</Inventory>
+            <Inventory>15</Inventory>
             <Name>Fox</Name>
             <Price>7.0</Price>
             <Supplier>Japan</Supplier>

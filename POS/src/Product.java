@@ -91,6 +91,8 @@ public class Product implements Serializable, NameBinarySearch {
 		this.inventory -= amount;
 	}
 	
-	
+	public void addInventoryAmount(int amount) {
+		this.inventory += amount;
+	}
 	
 }
