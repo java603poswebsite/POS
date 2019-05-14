@@ -566,6 +566,16 @@ public class HomeWin extends JFrame {
 
 		  return Pattern.matches(fpRegex, input);
 }
+	
+	public void setUser(User u) {
+		this.user = u;
+		
+	}
+	
+	public void setRegister(Register r) {
+		this.register = r;
+	}
+	
 }
 
 	
