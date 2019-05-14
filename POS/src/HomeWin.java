@@ -181,7 +181,8 @@ public class HomeWin extends JFrame {
 					JOptionPane.showMessageDialog(frame, "Insufficient payment.");
 					return;
 				}
-				calc.finishSale();			
+				calc.finishSale();	
+				inventoryButtons();
 				homeWinReset();		
 				JOptionPane.showMessageDialog(frame, "Sale complete.");
 			}
@@ -327,7 +328,7 @@ public class HomeWin extends JFrame {
 		JPanel panelProductButtons = new JPanel();
 		panel_1.add(panelProductButtons);
 		// adding inventory buttons dynamically
-				inventoryButtons(panel_1);
+				inventoryButtons();
 				
 			//	JButton addProd = new JButton("Add");
 			//	addProd.setBounds(450 , 700 , 100 , 30);
@@ -372,7 +373,7 @@ public class HomeWin extends JFrame {
 		
 	}
 	
-	private void inventoryButtons(JPanel panel_1) {
+	private void inventoryButtons() {
 		try {
 			InventoryList inv = database.ReadInventoryList();
 			List<Product> prod = inv.getProducts();
@@ -421,6 +422,9 @@ public class HomeWin extends JFrame {
 				String name = p.getName() + " ("+p.getInventory() + ")";
 				
 				final JButton button = new JButton(name);
+				if (p.getInventory() <= p.getThreshhold())
+					button.setBackground(Color.pink);
+				
 				button.setBounds(0 + 135*row , 50 + 60*col , 135 , 60);
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -437,7 +441,7 @@ public class HomeWin extends JFrame {
 							public void actionPerformed(ActionEvent e) {
 								if (numberCheck(amount.getText())) {
 									try {
-										if (Integer.parseInt(amount.getText()) < p.getInventory()) {
+										if (Integer.parseInt(amount.getText()) <= p.getInventory()) {
 										calc.startSale();
 										calc.addItem(p, Integer.parseInt(amount.getText()));
 										d.setVisible(false);
@@ -471,7 +475,7 @@ public class HomeWin extends JFrame {
 										if ( invP != null) {
 											invP.addInventoryAmount(Integer.parseInt(amount.getText()));;
 											database.writeInventoryList(invList);
-											inventoryButtons(panel_1);
+											inventoryButtons();
 											d.setVisible(false);
 										}
 									} 
@@ -543,7 +547,7 @@ public class HomeWin extends JFrame {
 						if (invList.findProductByName(p.getName()) == null && p.getName() != null) {
 							invList.addProduct(p);
 							database.writeInventoryList(invList);
-							inventoryButtons(panel);
+							inventoryButtons();
 						}
 					d.setVisible(false);
 					} catch (NumberFormatException e1) {

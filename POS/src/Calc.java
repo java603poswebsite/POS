@@ -61,12 +61,21 @@ public class Calc {
 			
 			// Update master inventory.	
 			InventoryList inv = dbService.ReadInventoryList();
+			List<Product> prods = inv.getProducts();
 			UserReceiptList rcptList = dbService.ReadReceiptList(pos.getRegId(), sale.getDate(), user.getName());
 			List<ReceiptItem> items = sale.getItems();
 			for(ReceiptItem ri : items) {
 				Product DBItem = inv.findProductByName(ri.getType().getName());
 				DBItem.removeInventoryAmount(ri.getAmount());
 			}
+			for (int i = 0; i < prods.size(); i++) {
+				Product p = prods.get(i);
+				if (p.getInventory() == 0) {
+					inv.removeProduct(p);
+					i--;
+				}
+			}
+			
 			dbService.writeInventoryList(inv);
 			rcptList.addReceipt(sale);
 			dbService.writeReceipt(rcptList);

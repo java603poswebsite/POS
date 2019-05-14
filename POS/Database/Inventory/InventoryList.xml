@@ -2,12 +2,12 @@
 <inventoryList>
     <Products>
         <Product>
-            <Inventory>5</Inventory>
+            <Inventory>8</Inventory>
             <Name>AAA</Name>
-            <Price>40.0</Price>
-            <Supplier>AAA</Supplier>
-            <Threshhold>30</Threshhold>
-            <pIdent>34178</pIdent>
+            <Price>20.0</Price>
+            <Supplier>USA</Supplier>
+            <Threshhold>4</Threshhold>
+            <pIdent>616381</pIdent>
         </Product>
         <Product>
             <Inventory>6</Inventory>
@@ -104,14 +104,6 @@
             <Supplier>Nutella</Supplier>
             <Threshhold>1</Threshhold>
             <pIdent>339154</pIdent>
-        </Product>
-        <Product>
-            <Inventory>2</Inventory>
-            <Name>Persian</Name>
-            <Price>3.0</Price>
-            <Supplier>RichGuy</Supplier>
-            <Threshhold>4</Threshhold>
-            <pIdent>23150</pIdent>
         </Product>
         <Product>
             <Inventory>10</Inventory>

@@ -101,7 +101,7 @@ public class Receipt implements Serializable {
         return this.receiptName;
     }
 	
-	@XmlElement(name = "Tax Rate")
+	@XmlElement(name = "TaxRate")
     public void setTaxRate(double rate) {
         this.taxRate = rate;
     }
