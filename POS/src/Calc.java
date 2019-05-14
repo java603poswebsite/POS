@@ -11,6 +11,7 @@ public class Calc {
 	private InventoryList masterInventory; 	// Reference to the master inventory list.
 	private WriteReadDatabase dbService;	// Global database services	
 	private JTextArea ReceiptDisplay;
+	private final double taxRate = 0.075;
 	
 	// Constructor
 	public Calc(User u, Register r, JTextArea display) {
@@ -35,13 +36,13 @@ public class Calc {
 	// Method for starting a sale.
 	public void startSale() {
 		if(sale == null) {
-			sale = new Receipt(pos.getRegId(), user.getUserId());
+			sale = new Receipt(pos.getRegId(), user.getUserId(), taxRate);
 		}
 	}
 	
 	// Method for adding individual items to a sale.
 	public void addItem(Product prod, int quantity) {
-		ReceiptItem ri = new ReceiptItem(sale, prod, quantity);
+		ReceiptItem ri = new ReceiptItem(sale, prod, quantity, taxRate);
 		sale.addReceiptItem(ri);
 		refreshDisplay();
 	}
@@ -120,5 +121,8 @@ public class Calc {
 			}
 	}
 	
+	public double getTaxRate() {
+		return this.taxRate;
+	}
 	
 }

@@ -440,7 +440,7 @@ public class HomeWin extends JFrame {
 										d.setVisible(false);
 										
 										int quantity = Integer.parseInt(amount.getText());
-										tax += 0.075 * p.getPrice() * quantity;
+										tax += calc.getTaxRate() * p.getPrice() * quantity;
 										subTotal += p.getPrice() * quantity;
 										total = tax + subTotal;
 						
