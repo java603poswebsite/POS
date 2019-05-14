@@ -356,8 +356,8 @@ public class HomeWin extends JFrame {
 		btnReports.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.setLocationRelativeTo(null);
-				Reports repo = new Reports ();
-				repo.setVisible(true);
+				ReportsUI repo = new ReportsUI ();
+				repo.frame.setVisible(true);
 			}
 		});
 		menuBar.add(btnReports);
