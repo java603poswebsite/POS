@@ -263,6 +263,7 @@ public class ReportsUI extends Gui {
 		);
 		
 		reportArea = new JTextArea();
+		reportArea.setEditable(false);
 		scrollPane_1.setViewportView(reportArea);
 		reportArea.setColumns(10);
 		panel_1.setLayout(gl_panel_1);
