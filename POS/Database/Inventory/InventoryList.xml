@@ -2,14 +2,6 @@
 <inventoryList>
     <Products>
         <Product>
-            <Inventory>8</Inventory>
-            <Name>AAA</Name>
-            <Price>20.0</Price>
-            <Supplier>USA</Supplier>
-            <Threshhold>4</Threshhold>
-            <pIdent>616381</pIdent>
-        </Product>
-        <Product>
             <Inventory>6</Inventory>
             <Name>AmericanShorthair</Name>
             <Price>12.0</Price>
@@ -114,7 +106,7 @@
             <pIdent>471775</pIdent>
         </Product>
         <Product>
-            <Inventory>50</Inventory>
+            <Inventory>45</Inventory>
             <Name>Pop Tarts</Name>
             <Price>5.0</Price>
             <Supplier>FoodInc</Supplier>

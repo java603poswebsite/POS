@@ -31,7 +31,7 @@ public class HomeWin extends JFrame {
 	private JTextField taxField;
 	private JTextField subtotalField;
 	private JTextField totalField;
-	private JTextArea receiptBox = new JTextArea();									// Receipt text field box
+	private JTextArea receiptBox = new JTextArea();	// Receipt text field box
 	private JTextField amountReceivedField;
 	private JTextField totalChangeField;
 	private Container jDesktopPanel;
@@ -117,7 +117,7 @@ public class HomeWin extends JFrame {
 				homeWinReset();
 			};
 		});
-		
+		receiptBox.setEditable(false);
 		panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 255, 255));
 		
