@@ -28,6 +28,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MainGUI extends JFrame {
 
+	// Global Transaction Types
+	private static int TRAN_ALL = 0;
+	private static int TRAN_NON_RETURN = 1;
+	private static int TRAN_RETURN = 2;
+	
 	private JFrame frame;
 	private JTextField taxField;
 	private JTextField subtotalField;
@@ -48,6 +53,7 @@ public class MainGUI extends JFrame {
 	private double total;
 	private double cashReceived;
 	private double cashChange;
+	private int transactionType = TRAN_ALL;
 	private static DecimalFormat df = new DecimalFormat("0.00");
 	
 	/**
@@ -173,21 +179,42 @@ public class MainGUI extends JFrame {
 		totalChangeField = new JTextField();
 		totalChangeField.setEditable(false);
 		
+		// Confirm Transaction button
 		JButton btnConfirmTransaction = new JButton("Confirm Transaction");
 		btnConfirmTransaction.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(totalChangeField.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(frame, "Please add items and payment.");
-					return;
+				if (transactionType == TRAN_NON_RETURN) {
+					if (totalChangeField.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(frame, "Please add items and payment.");
+						return;
+					}
+					else if (cashChange < 0.0) {
+						JOptionPane.showMessageDialog(frame, "Insufficient payment.");
+						return;
+					}
+					calc.finishSale();	
+					inventoryButtons();
+					homeWinReset();		
+					JOptionPane.showMessageDialog(frame, "Sale complete.");
 				}
-				else if(cashChange < 0.0) {
-					JOptionPane.showMessageDialog(frame, "Insufficient payment.");
-					return;
+				else if (transactionType == TRAN_RETURN) {
+					try {
+					InventoryList invList = database.ReadInventoryList();
+						for (ReceiptItem itm : calc.getSale().getItems()) {
+							Product invP = invList.findProductByName(itm.getName());
+							invP.addInventoryAmount(itm.getAmount());
+							database.writeInventoryList(invList);
+							inventoryButtons();						
+						}	
+						calc.finishSale();	
+						inventoryButtons();
+						homeWinReset();		
+						JOptionPane.showMessageDialog(frame, "Return complete.");
+					}
+					catch (Exception e) {
+						
+					}
 				}
-				calc.finishSale();	
-				inventoryButtons();
-				homeWinReset();		
-				JOptionPane.showMessageDialog(frame, "Sale complete.");
 			}
 		});
 		
@@ -423,9 +450,10 @@ public class MainGUI extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						JDialog dlgReceipt = new JDialog(frame, "Add/Remove Item(s)", true);	// Receipt dialogue window
 						dlgReceipt.setLayout( new FlowLayout(FlowLayout.LEADING) );  
-				        JButton btnAdd = new JButton ("Add");							// Add Button
-				        JButton btnRemove = new JButton ("Remove");						// Remove Button
-				        JButton btnRestock = new JButton ("Restock");					// Restock Button
+				        JButton btnAdd = new JButton ("Add");									// Add Button
+				        JButton btnRemove = new JButton ("Remove");								// Remove Button
+				        JButton btnReturn = new JButton ("Return");								// Return Button
+				        JButton btnRestock = new JButton ("Restock");							// Re-stock Button
 				        dlgReceipt.add( new JLabel ("Amount:"));  
 				        JTextField amount = new JTextField();
 				        amount.setColumns(10);		
@@ -433,8 +461,15 @@ public class MainGUI extends JFrame {
 				        // Event handler for MainCalc actions
 				        
 				        // Add Action
-				        btnAdd.addActionListener(new ActionListener() {				     
+				        btnAdd.addActionListener(new ActionListener() {	
 							public void actionPerformed(ActionEvent e) {
+								if (transactionType == TRAN_ALL) {
+									transactionType = TRAN_NON_RETURN;								
+								}
+								if (transactionType != TRAN_NON_RETURN) {
+									JOptionPane.showMessageDialog(frame, "Please start a separate sale transaction.");
+									return;
+								}
 								if (numberCheck(amount.getText())) {
 									try {
 										if (Integer.parseInt(amount.getText()) <= p.getInventory()) {
@@ -467,6 +502,13 @@ public class MainGUI extends JFrame {
 				        // Remove Action
 				        btnRemove.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
+								if (transactionType == TRAN_ALL) {
+									transactionType = TRAN_NON_RETURN;								
+								}
+								if (transactionType != TRAN_NON_RETURN) {
+									JOptionPane.showMessageDialog(frame, "Please start a separate sale transaction.");
+									return;
+								}
 								if (numberCheck(amount.getText())) {
 									try {
 										if (Integer.parseInt(amount.getText()) <= p.getInventory()) {
@@ -512,7 +554,42 @@ public class MainGUI extends JFrame {
 							};
 						});
 				        
-				        // Restock Action
+				     // Return Action
+				        btnReturn.addActionListener(new ActionListener() {				     
+							public void actionPerformed(ActionEvent e) {
+								if (transactionType == TRAN_ALL) {
+									transactionType = TRAN_RETURN;								
+								}
+								if (transactionType != TRAN_RETURN) {
+									JOptionPane.showMessageDialog(frame, "Please start a separate return transaction.");
+									return;
+								}
+								if (numberCheck(amount.getText())) {
+									try {										
+										if (calc == null) {
+											calc = new MainCalc(user, register, receiptBox);
+										}
+										calc.startSale();
+										calc.addItem(p, Integer.parseInt(amount.getText()));
+										dlgReceipt.setVisible(false);
+										
+										int quantity = Integer.parseInt(amount.getText());
+										tax += calc.getTaxRate() * p.getPrice() * quantity;
+										subTotal += p.getPrice() * quantity;
+										total = tax + subTotal;
+						
+										taxField.setText(df.format(tax));
+										subtotalField.setText(df.format(subTotal));
+										totalField.setText(df.format(total));									
+									} 
+									catch (NumberFormatException e1) {
+										e1.printStackTrace();
+									}
+								}
+							};
+						});
+				        
+				        // Re-stock Action
 				        btnRestock.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								if (numberCheck(amount.getText())) {
@@ -538,6 +615,7 @@ public class MainGUI extends JFrame {
 				        dlgReceipt.add(amount);
 				        dlgReceipt.add(btnAdd);
 				        dlgReceipt.add(btnRemove);
+				        dlgReceipt.add(btnReturn);
 				        dlgReceipt.add(btnRestock);
 				        dlgReceipt.setSize(180,130);    
 				        dlgReceipt.setLocationRelativeTo(panel_1);
