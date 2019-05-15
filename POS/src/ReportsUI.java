@@ -1,10 +1,10 @@
-import java.awt.Color;
 import java.io.File;
+import java.io.FilenameFilter;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
-import java.awt.EventQueue;
-import java.awt.Font;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -16,6 +16,7 @@ import java.awt.event.*;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
@@ -45,6 +46,13 @@ public class ReportsUI extends Gui {
 	JFrame frame;
 	private JTextField txtSelectReportType;
 	private JTextArea reportArea;
+	private WriteReadDatabase w = new WriteReadDatabase();
+	private JComboBox<String> RegChoice;
+	private String RegChoiceOption;
+	private String dayChoiceOption;
+	private JPanel panel;
+	private JComboBox<String> dayChoice;
+	private JPanel panel_2;
 	//private JTextArea reportArea;
 	
 
@@ -86,7 +94,7 @@ public class ReportsUI extends Gui {
 		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBackground(Color.DARK_GRAY);
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 255, 255));
@@ -103,6 +111,17 @@ public class ReportsUI extends Gui {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
 		    	try {
+		    		Component[] comp =panel_2.getComponents();
+		    		for (int i = 0; i < comp.length; i++) {
+		    			if (comp[i] == RegChoice)
+		    				panel_2.remove(RegChoice);
+		    			else if (comp[i] == dayChoice)
+		    				panel_2.remove(dayChoice);	
+		    		}
+		    		panel_2.validate();
+		    		panel_2.repaint();
+		    		
+		    		
 					printI();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -116,7 +135,16 @@ public class ReportsUI extends Gui {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
 		    	try {
-					printC();
+		    		Component[] comp =panel_2.getComponents();
+		    		for (int i = 0; i < comp.length; i++) {
+		    			if (comp[i] == RegChoice)
+		    				panel_2.remove(RegChoice);
+		    			else if (comp[i] == dayChoice)
+		    				panel_2.remove(dayChoice);	
+		    		}
+		    		panel_2.validate();
+		    		panel_2.repaint();
+		    		addChoicesRegistersC();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -129,7 +157,16 @@ public class ReportsUI extends Gui {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
 		    	try {
-					printR();
+		    		Component[] comp =panel_2.getComponents();
+		    		for (int i = 0; i < comp.length; i++) {
+		    			if (comp[i] == RegChoice)
+		    				panel_2.remove(RegChoice);
+		    			else if (comp[i] == dayChoice)
+		    				panel_2.remove(dayChoice);
+		    		}
+		    		panel_2.validate();
+		    		panel_2.repaint();
+		    		addChoicesRegistersR();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -197,6 +234,15 @@ public class ReportsUI extends Gui {
 		btnMangos.setBackground(Color.WHITE);
 		btnMangos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Component[] comp =panel_2.getComponents();
+	    		for (int i = 0; i < comp.length; i++) {
+	    			if (comp[i] == RegChoice)
+	    				panel_2.remove(RegChoice);
+	    			else if (comp[i] == dayChoice)
+	    				panel_2.remove(dayChoice);
+	    		}
+	    		panel_2.validate();
+	    		panel_2.repaint();
 			}
 		});
 		
@@ -204,7 +250,7 @@ public class ReportsUI extends Gui {
 		JButton btnBananas = new JButton("Cashier Report");
 		
 		
-		JPanel panel_2 = new JPanel();
+		panel_2 = new JPanel();
 		panel_2.setBackground(Color.DARK_GRAY);
 		
 		JTextPane txtpnGroceries = new JTextPane();
@@ -290,6 +336,7 @@ public class ReportsUI extends Gui {
 	
 	 
 	void printI() throws Exception {
+		reportArea.setText("");
 		WriteReadDatabase w = new WriteReadDatabase();
 		InventoryList inv = w.ReadInventoryList();
 		String invReport = "Inventory report: \n";
@@ -301,24 +348,25 @@ public class ReportsUI extends Gui {
 		
 		reportArea.setText(invReport);
 	}
-	private void printR() throws Exception {
+	private void printR(String regId, String day) throws Exception {
 		// TODO Auto-generated method stub
+		reportArea.setText("");
 		WriteReadDatabase w = new WriteReadDatabase();
 		UserList ul = w.ReadUserList();
 		List<User> users = ul.getUsers();
 		RegisterList rl = w.ReadRegisterList();
 		List<Register> registers = rl.getRegisters();
-		String day = LocalDate.now().toString();
+		//String day = LocalDate.now().toString();
 		String userReport = "End of Day Report: \n";
 		for (Register r : registers) {
 			Path currentRelativePath = Paths.get(""); 
 			String s = currentRelativePath.toAbsolutePath().toString();
-			File file = new File(s+ "\\Database\\" + r.getRegId() + "\\");
+			File file = new File(s+ "\\Database\\" + regId + "\\");
 			boolean exists = file.exists();
 			if (exists) {
 				userReport = userReport + "Date: " + day + ", Register ID: " + r.getRegId() + "\n";
 				for (User u : users) {
-					File userPath = new File(s+ "\\Database\\" + r.getRegId() + "\\" + day + "\\" + u.getName() +"\\" );
+					File userPath = new File(s+ "\\Database\\" + regId + "\\" + day + "\\" + u.getName() +"\\" );
 							boolean userExists = userPath.exists();
 					if (userExists) {
 						userReport = userReport + "User ID: "+u.getUserId() + ", UserName: " + u.getName() + "\n";
@@ -334,28 +382,27 @@ public class ReportsUI extends Gui {
 		}		
 		reportArea.setText(userReport);
 	}
-	void printC() throws Exception {
-		WriteReadDatabase w = new WriteReadDatabase();
+	void printC(String regId, String day) throws Exception {
+		reportArea.setText("");
 		Gui g = new Gui();
 		UserList ul = w.ReadUserList();
 		List<User> users = ul.getUsers();
 		RegisterList rl = w.ReadRegisterList();
 		List<Register> registers = rl.getRegisters();
-		String day = LocalDate.now().toString();
+		//String day = LocalDate.now().toString();
 		String userReport = "End of Shift Report: \n";
-		for (Register r : registers) {
 			Path currentRelativePath = Paths.get(""); 
 			String s = currentRelativePath.toAbsolutePath().toString();
-			File file = new File(s+ "\\Database\\" + r.getRegId() + "\\");
+			File file = new File(s+ "\\Database\\" + regId + "\\");
 			boolean exists = file.exists();
 			if (exists) {
-				userReport = userReport + "Date: " + day + ", Register ID: " + r.getRegId() + g.getuName()+"\n";
+				userReport = userReport + "Date: " + day + ", Register ID: " + regId + g.getuName()+"\n";
 				for (User u : users) {
-					File userPath = new File(s+ "\\Database\\" + r.getRegId() + "\\" + day + "\\" + g.getuName() +"\\" );
+					File userPath = new File(s+ "\\Database\\" + regId + "\\" + day + "\\" + g.getuName() +"\\" );
 							boolean userExists = userPath.exists();
 					if (userExists) {
 						userReport = userReport + "User ID: "+u.getUserId() + ", UserName: " + u.getName() + "\n";
-						UserReceiptList user = w.ReadReceiptList(r.getRegId(), day, u.getName());
+						UserReceiptList user = w.ReadReceiptList(Integer.parseInt(regId), day, u.getName());
 						List<Receipt> userReceipts = user.getReceipts();
 						for (Receipt rcpt : userReceipts)
 						{
@@ -368,7 +415,7 @@ public class ReportsUI extends Gui {
 				}
 			}
 
-			reportArea.setText(userReport);}
+			reportArea.setText(userReport);
 	}
 
 
@@ -377,4 +424,138 @@ public class ReportsUI extends Gui {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	private void addChoicesDaysR() {
+		Component[] comp =panel_2.getComponents();
+		for (int i = 0; i < comp.length; i++) {
+			if (comp[i] == dayChoice)
+				panel_2.remove(dayChoice);	
+		}
+		Path currentRelativePath = Paths.get(""); 
+		String s = currentRelativePath.toAbsolutePath().toString();
+		File file = new File(s+"\\database\\" + RegChoiceOption + "\\");
+		String[] directories = file.list(new FilenameFilter() {
+		  @Override
+		  public boolean accept(File current, String name) {
+		    return new File(current, name).isDirectory();
+		  }
+		});
+		
+		dayChoice = new JComboBox<String>(directories);
+		
+		dayChoice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dayChoiceOption = (String) dayChoice.getSelectedItem();
+				try {
+					printR(RegChoiceOption, dayChoiceOption);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		panel_2.add(dayChoice);
+		panel_2.validate();
+		panel_2.repaint();
+	}
+	
+	private void addChoicesDaysC() {
+		Component[] comp =panel_2.getComponents();
+		for (int i = 0; i < comp.length; i++) {
+			if (comp[i] == dayChoice)
+				panel_2.remove(dayChoice);	
+		}
+		Path currentRelativePath = Paths.get(""); 
+		String s = currentRelativePath.toAbsolutePath().toString();
+		File file = new File(s+"\\database\\" + RegChoiceOption + "\\");
+		String[] directories = file.list(new FilenameFilter() {
+		  @Override
+		  public boolean accept(File current, String name) {
+		    return new File(current, name).isDirectory();
+		  }
+		});
+		
+		dayChoice = new JComboBox<String>(directories);
+		
+		dayChoice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dayChoiceOption = (String) dayChoice.getSelectedItem();
+				try {
+					printC(RegChoiceOption, dayChoiceOption);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		panel_2.add(dayChoice);
+		panel_2.validate();
+		panel_2.repaint();
+	}
+	
+	
+	
+	private void addChoicesRegistersR() {
+		try {
+			RegisterList rl = w.ReadRegisterList();
+			List<Register> regList = rl.getRegisters();
+			String stringRegisters[]= new String[regList.size()];  
+			Register[] registers = new Register[regList.size()];
+			int count = 0;
+			for (Register reg : regList) {
+				stringRegisters[count] = Integer.toString(reg.getRegId());
+				registers[count] = reg;
+				count++;
+			}
+			
+			RegChoice = new JComboBox<String>(stringRegisters);
+			
+			RegChoice.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					RegChoiceOption = (String) RegChoice.getSelectedItem();
+					addChoicesDaysR();
+				}
+			});
+			panel_2.add(RegChoice);
+			panel_2.validate();
+			panel_2.repaint();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	private void addChoicesRegistersC() {
+		try {
+			RegisterList rl = w.ReadRegisterList();
+			List<Register> regList = rl.getRegisters();
+			String stringRegisters[]= new String[regList.size()];  
+			Register[] registers = new Register[regList.size()];
+			int count = 0;
+			for (Register reg : regList) {
+				stringRegisters[count] = Integer.toString(reg.getRegId());
+				registers[count] = reg;
+				count++;
+			}
+			
+			RegChoice = new JComboBox<String>(stringRegisters);
+			
+			RegChoice.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					RegChoiceOption = (String) RegChoice.getSelectedItem();
+					addChoicesDaysC();
+				}
+			});
+			panel_2.add(RegChoice);
+			panel_2.validate();
+			panel_2.repaint();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
