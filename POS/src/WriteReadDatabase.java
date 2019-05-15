@@ -103,30 +103,54 @@ public class WriteReadDatabase {
 		Path currentRelativePath = Paths.get(""); 
 		String s = currentRelativePath.toAbsolutePath().toString();
 		File file = new File(s+ "\\Database\\Inventory\\InventoryList.xml");
+		InventoryList invList = null;
+		boolean exists = file.exists();
+		if (exists) {
         JAXBContext jaxbContext = JAXBContext.newInstance(InventoryList.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        return (InventoryList) jaxbUnmarshaller.unmarshal(file);
+        invList = (InventoryList) jaxbUnmarshaller.unmarshal(file);
+		}
+		else {
+			invList = new InventoryList();
+		}
+		return invList;
 	}
 	
 	public UserList ReadUserList() throws Exception {
 		Path currentRelativePath = Paths.get(""); 
 		String s = currentRelativePath.toAbsolutePath().toString();
 		File file = new File(s+ "\\Database\\Credentials\\UserList.xml");
+		UserList uList = null;
+		boolean exists = file.exists();
+		if (exists) {
         JAXBContext jaxbContext = JAXBContext.newInstance(UserList.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        return (UserList) jaxbUnmarshaller.unmarshal(file);
+        uList = (UserList) jaxbUnmarshaller.unmarshal(file);
+		}
+		else {
+			uList = new UserList();
+		}
+		return uList;
 	}
 	
 	public RegisterList ReadRegisterList() throws Exception {
 		Path currentRelativePath = Paths.get(""); 
 		String s = currentRelativePath.toAbsolutePath().toString();
 		File file = new File(s+ "\\Database\\Registers\\RegisterList.xml");
+		RegisterList regList = null;
+		boolean exists = file.exists();
+		if (exists) {
         JAXBContext jaxbContext = JAXBContext.newInstance(RegisterList.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        return (RegisterList) jaxbUnmarshaller.unmarshal(file);
+        regList = (RegisterList) jaxbUnmarshaller.unmarshal(file);
+		}
+		else {
+			regList = new RegisterList();
+		}
+		return regList;
 	}
 	
 	public UserReceiptList ReadReceiptList (int registerId, String date, String userName) throws Exception {

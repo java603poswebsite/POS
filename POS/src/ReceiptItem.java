@@ -140,9 +140,11 @@ public class ReceiptItem implements Serializable, NameBinarySearch {
 	
 	public void setTax(double tax) {
 		this.tax = tax;
+
 }
 	public double getTaxRate() {
 		return taxRate;
 	}
 	
+
 }

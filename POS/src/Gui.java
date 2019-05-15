@@ -231,6 +231,7 @@ public class Gui  {
 		}
 		
 	}
+
 	public void setuName(String uname)
 	{
 	    uname= textField.getText();
@@ -240,6 +241,7 @@ public class Gui  {
 	{
 	    return textField.getText();
 	}
+
 	private void newUser() {
 		try {
 			panel.removeAll();
@@ -506,3 +508,5 @@ public class Gui  {
 	}
 	
 }
+
+
