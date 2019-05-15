@@ -171,7 +171,6 @@ public class MainGUI extends JFrame {
 		
 		// Total change text field
 		totalChangeField = new JTextField();
-		//totalChangeField.setColumns(10);
 		totalChangeField.setEditable(false);
 		
 		JButton btnConfirmTransaction = new JButton("Confirm Transaction");
@@ -292,8 +291,6 @@ public class MainGUI extends JFrame {
 		txtpnReceipt.setText("ITEM COST - RECEIPT ");
 		panel_3.add(txtpnReceipt);
 		
-		//JButton btnBananas = new JButton("");
-		//btnBananas.setIcon(new ImageIcon("C:\\Users\\Maria Torres\\git\\POS1\\POS\\images\\bananas.jpg"));
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.DARK_GRAY);
@@ -312,7 +309,6 @@ public class MainGUI extends JFrame {
 				.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					//.addComponent(btnBananas, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(desktopPane_2, GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
 					.addGap(16))
@@ -323,7 +319,6 @@ public class MainGUI extends JFrame {
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-						//.addComponent(btnBananas, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
 						.addComponent(desktopPane_2, GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
 					.addContainerGap())
 		);
@@ -334,15 +329,6 @@ public class MainGUI extends JFrame {
 		// adding inventory buttons dynamically
 				inventoryButtons();
 				
-			//	JButton addProd = new JButton("Add");
-			//	addProd.setBounds(450 , 700 , 100 , 30);
-			//	panel_1.add(addProd);
-			//	addProd.addActionListener(new ActionListener() {
-				//	public void actionPerformed(ActionEvent e) {
-				//		addProd(frame, panel_1);
-				//	}
-				//});
-		
 		
 		JTextPane txtpnSupermart = new JTextPane();
 		txtpnSupermart.setBackground(Color.DARK_GRAY);
@@ -541,7 +527,6 @@ public class MainGUI extends JFrame {
 									catch (NumberFormatException e1) {
 										e1.printStackTrace();
 									} catch (Exception e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 								}
