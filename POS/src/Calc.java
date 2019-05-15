@@ -11,6 +11,7 @@ public class Calc {
 	private InventoryList masterInventory; 	// Reference to the master inventory list.
 	private WriteReadDatabase dbService;	// Global database services	
 	private JTextArea ReceiptDisplay;
+	private final double taxRate = 0.075;
 	
 	// Constructor
 	public Calc(User u, Register r, JTextArea display) {
@@ -35,13 +36,13 @@ public class Calc {
 	// Method for starting a sale.
 	public void startSale() {
 		if(sale == null) {
-			sale = new Receipt(pos.getRegId(), user.getUserId());
+			sale = new Receipt(pos.getRegId(), user.getUserId(), taxRate);
 		}
 	}
 	
 	// Method for adding individual items to a sale.
 	public void addItem(Product prod, int quantity) {
-		ReceiptItem ri = new ReceiptItem(sale, prod, quantity);
+		ReceiptItem ri = new ReceiptItem(sale, prod, quantity, taxRate);
 		sale.addReceiptItem(ri);
 		refreshDisplay();
 	}
@@ -60,12 +61,21 @@ public class Calc {
 			
 			// Update master inventory.	
 			InventoryList inv = dbService.ReadInventoryList();
+			List<Product> prods = inv.getProducts();
 			UserReceiptList rcptList = dbService.ReadReceiptList(pos.getRegId(), sale.getDate(), user.getName());
 			List<ReceiptItem> items = sale.getItems();
 			for(ReceiptItem ri : items) {
 				Product DBItem = inv.findProductByName(ri.getType().getName());
 				DBItem.removeInventoryAmount(ri.getAmount());
 			}
+			for (int i = 0; i < prods.size(); i++) {
+				Product p = prods.get(i);
+				if (p.getInventory() == 0) {
+					inv.removeProduct(p);
+					i--;
+				}
+			}
+			
 			dbService.writeInventoryList(inv);
 			rcptList.addReceipt(sale);
 			dbService.writeReceipt(rcptList);
@@ -120,5 +130,8 @@ public class Calc {
 			}
 	}
 	
+	public double getTaxRate() {
+		return this.taxRate;
+	}
 	
 }

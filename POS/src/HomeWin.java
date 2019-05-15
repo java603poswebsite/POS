@@ -1,47 +1,52 @@
 
 
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-
-import javax.swing.JFrame;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
 import java.awt.Color;
 import java.awt.Container;
-
-import javax.swing.JTextPane;
+import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import javax.swing.JMenuBar;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.awt.event.ActionEvent;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class HomeWin extends JFrame {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextArea textField_3 = new JTextArea();
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField taxField;
+	private JTextField subtotalField;
+	private JTextField totalField;
+	private JTextArea receiptBox = new JTextArea();	// Receipt text field box
+	private JTextField amountReceivedField;
+	private JTextField totalChangeField;
 	private Container jDesktopPanel;
 	private User user = new User("Nikolai", "12345", 35);
 	private Register register = new Register(396432, 1000.0);
 	private WriteReadDatabase database = new WriteReadDatabase();
 	//private Receipt receipt = new Receipt(396432, 35); // placeholder until we get real credentials in here
-	private Calc calc = new Calc(user, register, textField_3);
+	private Calc calc = new Calc(user, register, receiptBox);
+	private JPanel panel_1 = new JPanel();
+	
+	private double tax;
+	private double subTotal;
+	private double total;
+	private double cashReceived;
+	private double cashChange;
 	
 	/**
 	 * Launch the application.hello
@@ -65,6 +70,29 @@ public class HomeWin extends JFrame {
 	 */
 	public HomeWin() {
 		initialize();
+		this.tax = 0.0;
+		this.subTotal = 0.0;
+		this.subTotal = 0.0;
+		this.cashReceived = 0.0;
+		this.cashChange = 0.0;
+	}
+	
+	private void homeWinReset() {
+		
+		// Clear text fields after finishing a sale.
+		taxField.setText("");
+		subtotalField.setText("");
+		totalField.setText("");
+		amountReceivedField.setText("");
+		totalChangeField.setText("");
+		receiptBox.setText("");
+		
+		// Reset values after finishing a sale.
+		tax = 0.0;
+		subTotal = 0.0;
+		total = 0.0;
+		cashReceived = 0.0;
+		cashChange = 0.0;
 	}
 
 	/**
@@ -83,44 +111,80 @@ public class HomeWin extends JFrame {
 		
 		JLabel lblTotal = new JLabel("Total:");
 		
-		JButton btnCalcelOrder = new JButton("Cancel Order");
-		
-		JPanel panel_1 = new JPanel();
+		JButton btnCancelOrder = new JButton("Cancel Order");
+		btnCancelOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				homeWinReset();
+			};
+		});
+		receiptBox.setEditable(false);
+		panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 255, 255));
 		
 		JLabel lblSubtotal = new JLabel("Subtotal:");
 		
 		JLabel lblTax = new JLabel("Tax:");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		// Tax text field
+		taxField = new JTextField();
+		taxField.setColumns(10);
+		taxField.setEditable(false);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		// Sub-total text field
+		subtotalField = new JTextField();
+		subtotalField.setColumns(10);
+		subtotalField.setEditable(false);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		// Total text field
+		totalField = new JTextField();
+		totalField.setColumns(10);
+		totalField.setEditable(false);
 		
-		textField_3.setLineWrap(true);
-		textField_3.setColumns(10);
+		// Receipt text field box
+		receiptBox.setLineWrap(true);
+		receiptBox.setColumns(10);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.DARK_GRAY);
 		
 		JLabel lblAmountReceived = new JLabel("Amount received $:");
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
+		// Amount received text field
+		amountReceivedField = new JTextField();
+		amountReceivedField.setColumns(10);
+		amountReceivedField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cashReceived = Double.parseDouble(amountReceivedField.getText());
+				cashChange = cashReceived - total;
+				if(cashChange < 0.0) {
+					JOptionPane.showMessageDialog(frame, "Insufficient payment.");
+				}
+				totalChangeField.setText(Double.toString(cashChange));
+			};
+		});
 		
 		JLabel lblTotalChange = new JLabel("Total change $:");
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
+		// Total change text field
+		totalChangeField = new JTextField();
+		//totalChangeField.setColumns(10);
+		totalChangeField.setEditable(false);
 		
 		JButton btnConfirmTransaction = new JButton("Confirm Transaction");
 		btnConfirmTransaction.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				calc.finishSale();
+				if(totalChangeField.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "Please add items and payment.");
+					return;
+				}
+				else if(cashChange < 0.0) {
+					JOptionPane.showMessageDialog(frame, "Insufficient payment.");
+					return;
+				}
+				calc.finishSale();	
+				inventoryButtons();
+				homeWinReset();		
+				JOptionPane.showMessageDialog(frame, "Sale complete.");
 			}
 		});
 		
@@ -145,21 +209,21 @@ public class HomeWin extends JFrame {
 										.addComponent(lblTotal, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
 									.addGap(18)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addComponent(totalField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(taxField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(subtotalField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 									.addPreferredGap(ComponentPlacement.RELATED))
-								.addComponent(btnCalcelOrder))
+								.addComponent(btnCancelOrder))
 							.addGap(18)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblAmountReceived)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+									.addComponent(amountReceivedField, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblTotalChange, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textField_5, 0, 0, Short.MAX_VALUE))
+									.addComponent(totalChangeField, 0, 0, Short.MAX_VALUE))
 								.addComponent(btnConfirmTransaction)))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(13)
@@ -167,7 +231,7 @@ public class HomeWin extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(textField_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
+								.addComponent(receiptBox, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
 							.addComponent(desktopPane_1, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)))
 					.addGap(18)
@@ -189,30 +253,31 @@ public class HomeWin extends JFrame {
 									.addGroup(groupLayout.createSequentialGroup()
 										.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
+										.addComponent(receiptBox, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
 										.addGap(11)
 										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 											.addComponent(lblTax)
-											.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+											.addComponent(taxField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 									.addGroup(groupLayout.createSequentialGroup()
 										.addGap(17)
 										.addComponent(desktopPane_1, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)))
 								.addGap(12)
 								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 									.addComponent(lblSubtotal)
-									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(subtotalField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addComponent(lblAmountReceived)
-									.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addComponent(amountReceivedField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 								.addGap(12)
 								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 									.addComponent(lblTotal)
-									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addComponent(btnConfirmTransaction))
+									.addComponent(totalField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblTotalChange)
+									.addComponent(totalChangeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 								.addGap(18)
 								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-									.addComponent(btnCalcelOrder)
-									.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addComponent(lblTotalChange)))))
+									.addComponent(btnCancelOrder)
+									.addComponent(btnConfirmTransaction))
+									)))
 					.addGap(8))
 		);
 		
@@ -263,7 +328,7 @@ public class HomeWin extends JFrame {
 		JPanel panelProductButtons = new JPanel();
 		panel_1.add(panelProductButtons);
 		// adding inventory buttons dynamically
-				inventoryButtons(panel_1);
+				inventoryButtons();
 				
 			//	JButton addProd = new JButton("Add");
 			//	addProd.setBounds(450 , 700 , 100 , 30);
@@ -293,8 +358,8 @@ public class HomeWin extends JFrame {
 		btnReports.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.setLocationRelativeTo(null);
-				Reports repo = new Reports ();
-				repo.setVisible(true);
+				ReportsUI repo = new ReportsUI ();
+				repo.frame.setVisible(true);
 			}
 		});
 		menuBar.add(btnReports);
@@ -308,7 +373,7 @@ public class HomeWin extends JFrame {
 		
 	}
 	
-	private void inventoryButtons(JPanel panel_1) {
+	private void inventoryButtons() {
 		try {
 			InventoryList inv = database.ReadInventoryList();
 			List<Product> prod = inv.getProducts();
@@ -354,9 +419,12 @@ public class HomeWin extends JFrame {
 			int row = 0;
 			int col = 0;
 			for (Product p : prod) {
-				String name = p.getName();
+				String name = p.getName() + " ("+p.getInventory() + ")";
 				
 				final JButton button = new JButton(name);
+				if (p.getInventory() <= p.getThreshhold())
+					button.setBackground(Color.pink);
+				
 				button.setBounds(0 + 135*row , 50 + 60*col , 135 , 60);
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -366,16 +434,55 @@ public class HomeWin extends JFrame {
 				        d.add( new JLabel ("Amount:"));  
 				        JTextField amount = new JTextField();
 				        amount.setColumns(10);
+				        JButton reStock = new JButton ("restock");
 				        
 				        // Event handler for calc actions
 				        b.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								if (numberCheck(amount.getText())) {
 									try {
+										if (Integer.parseInt(amount.getText()) <= p.getInventory()) {
 										calc.startSale();
 										calc.addItem(p, Integer.parseInt(amount.getText()));
 										d.setVisible(false);
-									} catch (NumberFormatException e1) {
+										
+										int quantity = Integer.parseInt(amount.getText());
+										tax += calc.getTaxRate() * p.getPrice() * quantity;
+										subTotal += p.getPrice() * quantity;
+										total = tax + subTotal;
+						
+										taxField.setText(Double.toString(tax));
+										subtotalField.setText(Double.toString(subTotal));
+										totalField.setText(Double.toString(total));
+										}
+										else {
+											JOptionPane.showMessageDialog(frame, "Not Enough Inventory.");
+										}
+									} 
+									catch (NumberFormatException e1) {
+										e1.printStackTrace();
+									}
+								}
+							};
+						});
+				        
+				        reStock.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								if (numberCheck(amount.getText())) {
+									try {
+										InventoryList invList = database.ReadInventoryList();
+										Product invP = invList.findProductByName(p.getName());
+										if ( invP != null) {
+											invP.addInventoryAmount(Integer.parseInt(amount.getText()));;
+											database.writeInventoryList(invList);
+											inventoryButtons();
+											d.setVisible(false);
+										}
+									} 
+									catch (NumberFormatException e1) {
+										e1.printStackTrace();
+									} catch (Exception e1) {
+										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 								}
@@ -384,7 +491,8 @@ public class HomeWin extends JFrame {
 				        
 				        d.add(amount);
 				        d.add(b);
-				        d.setSize(150,130);    
+				        d.add(reStock);
+				        d.setSize(180,130);    
 				        d.setLocationRelativeTo(panel_1);
 				        d.setVisible(true);
 					};
@@ -439,7 +547,7 @@ public class HomeWin extends JFrame {
 						if (invList.findProductByName(p.getName()) == null && p.getName() != null) {
 							invList.addProduct(p);
 							database.writeInventoryList(invList);
-							inventoryButtons(panel);
+							inventoryButtons();
 						}
 					d.setVisible(false);
 					} catch (NumberFormatException e1) {
@@ -493,7 +601,16 @@ public class HomeWin extends JFrame {
 
 		  return Pattern.matches(fpRegex, input);
 }
+	
+	public void setUser(User u) {
+		this.user = u;
+		
+	}
+	
+	public void setRegister(Register r) {
+		this.register = r;
+	}
+	
 }
 
 	
-

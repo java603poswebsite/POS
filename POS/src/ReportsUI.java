@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
@@ -12,7 +11,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.*;  
-import java.awt.event.*;  
+import java.awt.event.*;
+
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.Border;
+
 import java.lang.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -80,8 +83,8 @@ public class ReportsUI extends Gui {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(176, 224, 230));
-		frame.setBounds(100, 100, 1020, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 900, 600);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.DARK_GRAY);
@@ -140,41 +143,43 @@ public class ReportsUI extends Gui {
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 998, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(42)
+					//.addGap(42)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 							.addComponent(rdbtnInventoryReport, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(rdbtnCashierReport, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(rdbtnRegisterReport, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addComponent(txtSelectReportType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
+					//.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 605, GroupLayout.PREFERRED_SIZE)))
+						//.addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 605, GroupLayout.PREFERRED_SIZE)
+						))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(32)
+					//.addGap(32)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					//.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						//.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtSelectReportType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addGap(12)
+						//.addGap(12)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(rdbtnInventoryReport)
-									.addGap(24)
+									//.addGap(24)
 									.addComponent(rdbtnCashierReport)
-									.addGap(13)
+									//.addGap(13)
 									.addComponent(rdbtnRegisterReport))
-								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 415, Short.MAX_VALUE))
+								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 515, Short.MAX_VALUE)
+								)
 							.addContainerGap())))
 		);
 		
@@ -211,27 +216,31 @@ public class ReportsUI extends Gui {
 		
 		reportArea = new JTextArea();
 		reportArea.setColumns(10);
+		reportArea.setBorder(null);
+		reportArea.setEditable(false);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		
+		scrollPane_1.setBorder(null);
 	
 		
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+				.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+				//.addGroup(gl_panel_1.createSequentialGroup()
+					//.addContainerGap()
+					//.addComponent(btnBananas, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
+				//		)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnBananas, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addComponent(reportArea, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(63))
+					.addComponent(reportArea, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+					//.addPreferredGap(ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 640, GroupLayout.PREFERRED_SIZE)
+					//.addGap(18)
+					//.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					//.addGap(63)
+					)
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -239,18 +248,21 @@ public class ReportsUI extends Gui {
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(reportArea, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-							.addGap(78)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(32616)
-							.addComponent(btnBananas, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
+							//.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(reportArea, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+							//.addGap(78)
+							//.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							//.addGap(32616)
+							//.addComponent(btnBananas, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+							)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(35)
-							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE))))
+							//.addGap(35)
+							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+							)))
 		);
 		
 		reportArea = new JTextArea();
+		reportArea.setEditable(false);
 		scrollPane_1.setViewportView(reportArea);
 		reportArea.setColumns(10);
 		panel_1.setLayout(gl_panel_1);
@@ -263,17 +275,17 @@ public class ReportsUI extends Gui {
 		panel.add(txtpnSupermart);
 		frame.getContentPane().setLayout(groupLayout);
 		
-		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
+		//JMenuBar menuBar = new JMenuBar();
+		//frame.setJMenuBar(menuBar);
 		
-		JButton btnMainMenu = new JButton("Main Menu");
-		menuBar.add(btnMainMenu);
+		//JButton btnMainMenu = new JButton("Main Menu");
+		//menuBar.add(btnMainMenu);
 
-		JButton btnReports = new JButton("Reports");
-		menuBar.add(btnReports);
+		//JButton btnReports = new JButton("Reports");
+		//menuBar.add(btnReports);
 		
-		JButton btnRegisters = new JButton("Registers");
-		menuBar.add(btnRegisters);
+		//JButton btnRegisters = new JButton("Registers");
+		//menuBar.add(btnRegisters);
 	}
 	
 	 
@@ -289,14 +301,15 @@ public class ReportsUI extends Gui {
 		
 		reportArea.setText(invReport);
 	}
-	void printC() throws Exception {
+	private void printR() throws Exception {
+		// TODO Auto-generated method stub
 		WriteReadDatabase w = new WriteReadDatabase();
 		UserList ul = w.ReadUserList();
 		List<User> users = ul.getUsers();
 		RegisterList rl = w.ReadRegisterList();
 		List<Register> registers = rl.getRegisters();
 		String day = LocalDate.now().toString();
-		String userReport = "End of Shift Report: \n";
+		String userReport = "End of Day Report: \n";
 		for (Register r : registers) {
 			Path currentRelativePath = Paths.get(""); 
 			String s = currentRelativePath.toAbsolutePath().toString();
@@ -314,6 +327,39 @@ public class ReportsUI extends Gui {
 						for (Receipt rcpt : userReceipts)
 						{
 							userReport = userReport + "Receipt ID: " + rcpt.getReceiptId() + ", Items Sold: " + rcpt.getSize() +", Total Sale: " + rcpt.getTotal() + "\n";
+						}						
+					}
+				}
+			}
+		}		
+		reportArea.setText(userReport);
+	}
+	void printC() throws Exception {
+		WriteReadDatabase w = new WriteReadDatabase();
+		Gui g = new Gui();
+		UserList ul = w.ReadUserList();
+		List<User> users = ul.getUsers();
+		RegisterList rl = w.ReadRegisterList();
+		List<Register> registers = rl.getRegisters();
+		String day = LocalDate.now().toString();
+		String userReport = "End of Shift Report: \n";
+		for (Register r : registers) {
+			Path currentRelativePath = Paths.get(""); 
+			String s = currentRelativePath.toAbsolutePath().toString();
+			File file = new File(s+ "\\Database\\" + r.getRegId() + "\\");
+			boolean exists = file.exists();
+			if (exists) {
+				userReport = userReport + "Date: " + day + ", Register ID: " + r.getRegId() + g.getuName()+"\n";
+				for (User u : users) {
+					File userPath = new File(s+ "\\Database\\" + r.getRegId() + "\\" + day + "\\" + g.getuName() +"\\" );
+							boolean userExists = userPath.exists();
+					if (userExists) {
+						userReport = userReport + "User ID: "+u.getUserId() + ", UserName: " + u.getName() + "\n";
+						UserReceiptList user = w.ReadReceiptList(r.getRegId(), day, u.getName());
+						List<Receipt> userReceipts = user.getReceipts();
+						for (Receipt rcpt : userReceipts)
+						{
+							userReport = userReport + "Receipt ID: " + rcpt.getReceiptId() + ", Items Sold: " + rcpt.getSize() +", Total Sale: " + rcpt.getTotal() + "\n";
 						}
 						
 						
@@ -321,14 +367,8 @@ public class ReportsUI extends Gui {
 					}
 				}
 			}
-		}
-		
-		reportArea.setText(userReport);
-	}
-	void printR() throws Exception {
-		WriteReadDatabase w = new WriteReadDatabase();
 
-		reportArea.setText("Register day report: " +w.ReadReceiptList(2019-05-02, null, null).getClass().getSimpleName());
+			reportArea.setText(userReport);}
 	}
 
 

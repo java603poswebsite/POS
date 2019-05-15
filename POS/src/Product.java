@@ -16,6 +16,7 @@ public class Product implements Serializable, NameBinarySearch {
 	private int threshHold = 0;
 	private double price = 0.00;
 	private String supplier = "";
+	private int removeIndicator = 0;
 	
 	
 	public Product(String name, int inv, int thresh, double price, String supplier ) {
@@ -91,6 +92,12 @@ public class Product implements Serializable, NameBinarySearch {
 		this.inventory -= amount;
 	}
 	
+	public void addInventoryAmount(int amount) {
+		this.inventory += amount;
+	}
 	
+	public void setRemoveIndicator() {
+		this.removeIndicator = 1;
+	}
 	
 }

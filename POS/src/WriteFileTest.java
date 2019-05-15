@@ -54,6 +54,11 @@ public class WriteFileTest {
 			
 			UserReceiptList receiptlist = new UserReceiptList(u, 396432);
 			
+			Product p4 = new Product("Cat", 3, 1, 200, "Minnesota");
+			Product p5 = new Product("Dog", 4, 1, 500, "Minnesota");
+			
+			il.addProduct(p4);
+			il.addProduct(p5);
 			
 			Product p1 = il.findProductByName("PineApple");
 			Product p2 = il.findProductByName("Strawberry");
@@ -61,8 +66,12 @@ public class WriteFileTest {
 			Product p8 = il.findProductByName("Dog");
 			
 			Receipt receipt = new Receipt(396432, 35);
-			receipt.addReceiptItem(p8, 8);
+			receipt.addReceiptItem(p1, 4);
+			receipt.addReceiptItem(p2, 6);
+			receipt.addReceiptItem(p3, 8);
+			receipt.findProductByName("Strawberry").voidReceiptItem();
 			
+			ReceiptItem test = receipt.findProductByName("Strawberry");
 			
 			
 			receiptlist.addReceipt(receipt);

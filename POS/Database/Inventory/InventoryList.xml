@@ -2,14 +2,6 @@
 <inventoryList>
     <Products>
         <Product>
-            <Inventory>5</Inventory>
-            <Name>AAA</Name>
-            <Price>40.0</Price>
-            <Supplier>AAA</Supplier>
-            <Threshhold>30</Threshhold>
-            <pIdent>34178</pIdent>
-        </Product>
-        <Product>
             <Inventory>6</Inventory>
             <Name>AmericanShorthair</Name>
             <Price>12.0</Price>
@@ -42,7 +34,7 @@
             <pIdent>429562</pIdent>
         </Product>
         <Product>
-            <Inventory>20</Inventory>
+            <Inventory>25</Inventory>
             <Name>Carrots</Name>
             <Price>5.0</Price>
             <Supplier>bugsbunny</Supplier>
@@ -66,7 +58,7 @@
             <pIdent>395651</pIdent>
         </Product>
         <Product>
-            <Inventory>10</Inventory>
+            <Inventory>15</Inventory>
             <Name>Fox</Name>
             <Price>7.0</Price>
             <Supplier>Japan</Supplier>
@@ -74,7 +66,7 @@
             <pIdent>171939</pIdent>
         </Product>
         <Product>
-            <Inventory>50</Inventory>
+            <Inventory>45</Inventory>
             <Name>Hair</Name>
             <Price>5.0</Price>
             <Supplier>Rabbit</Supplier>
@@ -106,14 +98,6 @@
             <pIdent>339154</pIdent>
         </Product>
         <Product>
-            <Inventory>2</Inventory>
-            <Name>Persian</Name>
-            <Price>3.0</Price>
-            <Supplier>RichGuy</Supplier>
-            <Threshhold>4</Threshhold>
-            <pIdent>23150</pIdent>
-        </Product>
-        <Product>
             <Inventory>10</Inventory>
             <Name>PineApple</Name>
             <Price>10.0</Price>
@@ -122,7 +106,7 @@
             <pIdent>471775</pIdent>
         </Product>
         <Product>
-            <Inventory>50</Inventory>
+            <Inventory>45</Inventory>
             <Name>Pop Tarts</Name>
             <Price>5.0</Price>
             <Supplier>FoodInc</Supplier>
