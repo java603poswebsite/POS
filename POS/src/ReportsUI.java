@@ -382,7 +382,8 @@ public class ReportsUI extends Login {
 		}		
 		reportArea.setText(userReport);
 	}
-	void printC() throws Exception {
+	void printC(String regId, String day) throws Exception {
+		reportArea.setText("");
 		WriteReadDatabase w = new WriteReadDatabase();
 		Login g = new Login();
 		UserList ul = w.ReadUserList();
