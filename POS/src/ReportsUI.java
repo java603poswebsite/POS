@@ -419,14 +419,16 @@ public class ReportsUI extends Login {
 						List<Receipt> userReceipts = userL.getReceipts();
 						for (Receipt rcpt : userReceipts)
 						{
+							userReport = userReport + "\n";
 							userReport = userReport + "     Receipt ID: " + rcpt.getReceiptId() + ", Items Sold: " + rcpt.getSize() +", Total Sale: $" + rcpt.getTotal() +  ", Total Tax: $" + rcpt.getTax() + "\n";
 							List<ReceiptItem> rcptItems = rcpt.getItems();
 							for (ReceiptItem item : rcptItems) {
-								userReport = userReport + "          " + item.getName() + " Amount: " + item.getAmount() + ", Price: " + item.getPrice() + "\n";
+								userReport = userReport + "          Product: " + item.getName() + ", Amount: " + item.getAmount() + ", Price: " + item.getPrice() + "\n";
 								
 							}
 							total += rcpt.getTotal();
 							tax += rcpt.getTax();
+							userReport = userReport + "\n";
 						}
 						userReport = userReport + "Total Sales: $" + total + ", Total Tax: $" + tax + "\n";
 						
