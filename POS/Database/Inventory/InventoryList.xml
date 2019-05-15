@@ -34,7 +34,7 @@
             <pIdent>429562</pIdent>
         </Product>
         <Product>
-            <Inventory>20</Inventory>
+            <Inventory>16</Inventory>
             <Name>Carrots</Name>
             <Price>5.0</Price>
             <Supplier>bugsbunny</Supplier>
@@ -50,7 +50,7 @@
             <pIdent>256706</pIdent>
         </Product>
         <Product>
-            <Inventory>1</Inventory>
+            <Inventory>6</Inventory>
             <Name>Dog</Name>
             <Price>500.0</Price>
             <Supplier>Minnesota</Supplier>
@@ -112,6 +112,14 @@
             <Supplier>FoodInc</Supplier>
             <Threshhold>10</Threshhold>
             <pIdent>183768</pIdent>
+        </Product>
+        <Product>
+            <Inventory>100</Inventory>
+            <Name>Pumpkin</Name>
+            <Price>8.0</Price>
+            <Supplier>Minnesota</Supplier>
+            <Threshhold>20</Threshhold>
+            <pIdent>323554</pIdent>
         </Product>
         <Product>
             <Inventory>40</Inventory>

@@ -113,12 +113,14 @@ public class MainGUI extends JFrame {
 		
 		JLabel lblTotal = new JLabel("Total:");
 		
+		// Cancel Order button
 		JButton btnCancelOrder = new JButton("Cancel Order");
 		btnCancelOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				homeWinReset();
 			};
 		});
+				
 		receiptBox.setEditable(false);
 		panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 255, 255));
@@ -427,19 +429,23 @@ public class MainGUI extends JFrame {
 				if (p.getInventory() <= p.getThreshhold())
 					button.setBackground(Color.pink);
 				
+				// Receipt dialogue window buttons
 				button.setBounds(0 + 135*row , 50 + 60*col , 135 , 60);
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						JDialog d = new JDialog(frame, "Add Item(s)", true);
-						d.setLayout( new FlowLayout(FlowLayout.LEADING) );  
-				        JButton b = new JButton ("Add");
-				        d.add( new JLabel ("Amount:"));  
+						JDialog dlgReceipt = new JDialog(frame, "Add/Remove Item(s)", true);	// Receipt dialogue window
+						dlgReceipt.setLayout( new FlowLayout(FlowLayout.LEADING) );  
+				        JButton btnAdd = new JButton ("Add");							// Add Button
+				        JButton btnRemove = new JButton ("Remove");						// Remove Button
+				        JButton btnRestock = new JButton ("Restock");					// Restock Button
+				        dlgReceipt.add( new JLabel ("Amount:"));  
 				        JTextField amount = new JTextField();
-				        amount.setColumns(10);
-				        JButton reStock = new JButton ("restock");
+				        amount.setColumns(10);		
 				        
-				        // Event handler for calc actions
-				        b.addActionListener(new ActionListener() {
+				        // Event handler for MainCalc actions
+				        
+				        // Add Action
+				        btnAdd.addActionListener(new ActionListener() {				     
 							public void actionPerformed(ActionEvent e) {
 								if (numberCheck(amount.getText())) {
 									try {
@@ -448,7 +454,7 @@ public class MainGUI extends JFrame {
 												calc = new MainCalc(user, register, receiptBox);
 										calc.startSale();
 										calc.addItem(p, Integer.parseInt(amount.getText()));
-										d.setVisible(false);
+										dlgReceipt.setVisible(false);
 										
 										int quantity = Integer.parseInt(amount.getText());
 										tax += calc.getTaxRate() * p.getPrice() * quantity;
@@ -470,7 +476,56 @@ public class MainGUI extends JFrame {
 							};
 						});
 				        
-				        reStock.addActionListener(new ActionListener() {
+				        // Remove Action
+				        btnRemove.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								if (numberCheck(amount.getText())) {
+									try {
+										if (Integer.parseInt(amount.getText()) <= p.getInventory()) {
+											if (calc == null)
+												calc = new MainCalc(user, register, receiptBox);
+										
+											if (calc.getSale() == null) {
+												JOptionPane.showMessageDialog(frame, "There is nothing to remove from this sale.");
+												return;
+											}
+											int currentAmount = 0;
+											for (ReceiptItem itm : calc.getSale().getItems()) {
+												if (p.getName().equals(itm.getName())) {
+													currentAmount += itm.getAmount();
+												}										
+											}
+											if (currentAmount < Integer.parseInt(amount.getText())) {
+												JOptionPane.showMessageDialog(frame, "Not enough quantity to remove for this item.");
+												return;
+											}
+										
+											calc.startSale();
+											calc.addItem(p, -Integer.parseInt(amount.getText()));
+											dlgReceipt.setVisible(false);
+											
+											int quantity = Integer.parseInt(amount.getText());
+											tax -= calc.getTaxRate() * p.getPrice() * quantity;
+											subTotal -= p.getPrice() * quantity;
+											total = tax + subTotal;
+							
+											taxField.setText(df.format(tax));
+											subtotalField.setText(df.format(subTotal));
+											totalField.setText(df.format(total));
+										}
+										else {
+											JOptionPane.showMessageDialog(frame, "Not Enough Inventory.");
+										}
+									} 
+									catch (NumberFormatException e1) {
+										e1.printStackTrace();
+									}
+								}
+							};
+						});
+				        
+				        // Restock Action
+				        btnRestock.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								if (numberCheck(amount.getText())) {
 									try {
@@ -480,7 +535,7 @@ public class MainGUI extends JFrame {
 											invP.addInventoryAmount(Integer.parseInt(amount.getText()));;
 											database.writeInventoryList(invList);
 											inventoryButtons();
-											d.setVisible(false);
+											dlgReceipt.setVisible(false);
 										}
 									} 
 									catch (NumberFormatException e1) {
@@ -493,12 +548,14 @@ public class MainGUI extends JFrame {
 							};
 						});
 				        
-				        d.add(amount);
-				        d.add(b);
-				        d.add(reStock);
-				        d.setSize(180,130);    
-				        d.setLocationRelativeTo(panel_1);
-				        d.setVisible(true);
+				        dlgReceipt.add(amount);
+				        dlgReceipt.add(btnAdd);
+				        dlgReceipt.add(btnRemove);
+				        dlgReceipt.add(btnRestock);
+				        dlgReceipt.setSize(180,130);    
+				        dlgReceipt.setLocationRelativeTo(panel_1);
+				        dlgReceipt.pack();
+				        dlgReceipt.setVisible(true);
 					};
 				});
 				panel_1.add(button);
