@@ -170,7 +170,7 @@
             <pIdent>991732</pIdent>
         </Product>
         <Product>
-            <Inventory>20</Inventory>
+            <Inventory>10</Inventory>
             <Name>ZZZ</Name>
             <Price>5.0</Price>
             <Supplier>North</Supplier>

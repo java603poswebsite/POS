@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<userReceiptList>
+    <Date>2019-05-14</Date>
+    <Receipts>
+        <Receipt>
+            <Date>2019-05-14</Date>
+            <items>
+                <ReceiptItems>
+                    <Amount>4</Amount>
+                    <isVoid>0</isVoid>
+                    <Name>Light</Name>
+                    <Price>4.0</Price>
+                    <RIIdent>798774</RIIdent>
+                    <Tax>1.2</Tax>
+                </ReceiptItems>
+                <ReceiptItems>
+                    <Amount>10</Amount>
+                    <isVoid>0</isVoid>
+                    <Name>ZZZ</Name>
+                    <Price>5.0</Price>
+                    <RIIdent>244642</RIIdent>
+                    <Tax>3.75</Tax>
+                </ReceiptItems>
+            </items>
+            <ReceiptId>931861</ReceiptId>
+            <ReceiptName>2019-05-14-931861</ReceiptName>
+            <RegisterId>396432</RegisterId>
+            <size>14</size>
+            <Tax>4.95</Tax>
+            <TaxRate>0.075</TaxRate>
+            <Total>66.0</Total>
+            <UserId>35</UserId>
+        </Receipt>
+    </Receipts>
+    <registerId>396432</registerId>
+    <UserID>0</UserID>
+    <UserName>Nikolai</UserName>
+</userReceiptList>

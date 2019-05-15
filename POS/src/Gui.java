@@ -212,6 +212,7 @@ public class Gui  {
 					home.setUser(user);
 					home.setRegister(reg);
 					((HomeWin) home).setVisible(true);
+					frame.dispose();
 			}
 			else if (reg == null) {
 				JOptionPane.showMessageDialog(frame, "Please choose a register.");

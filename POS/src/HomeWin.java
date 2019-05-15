@@ -39,7 +39,7 @@ public class HomeWin extends JFrame {
 	private Register register;
 	private WriteReadDatabase database = new WriteReadDatabase();
 	//private Receipt receipt = new Receipt(396432, 35); // placeholder until we get real credentials in here
-	private Calc calc = new Calc(user, register, receiptBox);
+	private Calc calc = null;
 	private JPanel panel_1 = new JPanel();
 	
 	private double tax;
@@ -442,6 +442,8 @@ public class HomeWin extends JFrame {
 								if (numberCheck(amount.getText())) {
 									try {
 										if (Integer.parseInt(amount.getText()) <= p.getInventory()) {
+											if (calc == null)
+												calc = new Calc(user, register, receiptBox);
 										calc.startSale();
 										calc.addItem(p, Integer.parseInt(amount.getText()));
 										d.setVisible(false);
