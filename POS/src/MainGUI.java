@@ -29,9 +29,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class MainGUI extends JFrame {
 
 	// Global Transaction Types
-	private static int TRAN_ALL = 0;
-	private static int TRAN_NON_RETURN = 1;
-	private static int TRAN_RETURN = 2;
+	public static int TRAN_ALL = 0;
+	public static int TRAN_NON_RETURN = 1;
+	public static int TRAN_RETURN = 2;
 	
 	private JFrame frame;
 	private JTextField taxField;
@@ -101,6 +101,9 @@ public class MainGUI extends JFrame {
 		total = 0.0;
 		cashReceived = 0.0;
 		cashChange = 0.0;
+		
+		// Reset transaction type.
+		transactionType = TRAN_ALL;
 	}
 
 	/**
@@ -192,22 +195,21 @@ public class MainGUI extends JFrame {
 						JOptionPane.showMessageDialog(frame, "Insufficient payment.");
 						return;
 					}
-					calc.finishSale();	
+					calc.finishSale(TRAN_NON_RETURN);	
 					inventoryButtons();
 					homeWinReset();		
 					JOptionPane.showMessageDialog(frame, "Sale complete.");
 				}
 				else if (transactionType == TRAN_RETURN) {
 					try {
-					InventoryList invList = database.ReadInventoryList();
+						InventoryList invList = database.ReadInventoryList();
 						for (ReceiptItem itm : calc.getSale().getItems()) {
 							Product invP = invList.findProductByName(itm.getName());
 							invP.addInventoryAmount(itm.getAmount());
 							database.writeInventoryList(invList);
 							inventoryButtons();						
 						}	
-						calc.finishSale();	
-						inventoryButtons();
+						calc.finishSale(TRAN_RETURN);						
 						homeWinReset();		
 						JOptionPane.showMessageDialog(frame, "Return complete.");
 					}

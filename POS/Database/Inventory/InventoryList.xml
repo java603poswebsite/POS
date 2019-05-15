@@ -34,7 +34,7 @@
             <pIdent>429562</pIdent>
         </Product>
         <Product>
-            <Inventory>18</Inventory>
+            <Inventory>20</Inventory>
             <Name>Carrots</Name>
             <Price>5.0</Price>
             <Supplier>bugsbunny</Supplier>
@@ -42,7 +42,7 @@
             <pIdent>222460</pIdent>
         </Product>
         <Product>
-            <Inventory>13</Inventory>
+            <Inventory>20</Inventory>
             <Name>Cat</Name>
             <Price>200.0</Price>
             <Supplier>Minnesota</Supplier>
@@ -50,7 +50,7 @@
             <pIdent>256706</pIdent>
         </Product>
         <Product>
-            <Inventory>6</Inventory>
+            <Inventory>10</Inventory>
             <Name>Dog</Name>
             <Price>500.0</Price>
             <Supplier>Minnesota</Supplier>

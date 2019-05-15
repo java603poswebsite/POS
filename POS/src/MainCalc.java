@@ -58,7 +58,7 @@ public class MainCalc {
 	}
 	
 	// Method for finishing a sale.
-	public void finishSale() {
+	public void finishSale(int transactionType) {
 		
 		try {
 			allSales.addReceipt(sale);
@@ -70,7 +70,9 @@ public class MainCalc {
 			List<ReceiptItem> items = sale.getItems();
 			for(ReceiptItem ri : items) {
 				Product DBItem = inv.findProductByName(ri.getType().getName());
-				DBItem.removeInventoryAmount(ri.getAmount());
+				if (transactionType != MainGUI.TRAN_RETURN) {
+					DBItem.removeInventoryAmount(ri.getAmount());
+				}
 			}
 			for (int i = 0; i < prods.size(); i++) {
 				Product p = prods.get(i);
