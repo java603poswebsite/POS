@@ -35,8 +35,8 @@ public class HomeWin extends JFrame {
 	private JTextField amountReceivedField;
 	private JTextField totalChangeField;
 	private Container jDesktopPanel;
-	private User user = new User("Nikolai", "12345", 35);
-	private Register register = new Register(396432, 1000.0);
+	private User user;
+	private Register register;
 	private WriteReadDatabase database = new WriteReadDatabase();
 	//private Receipt receipt = new Receipt(396432, 35); // placeholder until we get real credentials in here
 	private Calc calc = new Calc(user, register, receiptBox);
