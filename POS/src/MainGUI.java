@@ -376,6 +376,8 @@ public class MainGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.setLocationRelativeTo(null);
 				ReportsUI repo = new ReportsUI ();
+				repo.setUser(user);
+				repo.setRegister(register);
 				repo.frame.setVisible(true);
 			}
 		});

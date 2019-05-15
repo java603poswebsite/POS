@@ -53,6 +53,8 @@ public class ReportsUI extends Login {
 	private JPanel panel;
 	private JComboBox<String> dayChoice;
 	private JPanel panel_2;
+	private User user;
+	private Register reg;
 	//private JTextArea reportArea;
 	
 
@@ -354,6 +356,8 @@ public class ReportsUI extends Login {
 		WriteReadDatabase w = new WriteReadDatabase();
 		UserList ul = w.ReadUserList();
 		List<User> users = ul.getUsers();
+		double total = 0;
+		double tax = 0;
 		RegisterList rl = w.ReadRegisterList();
 		List<Register> registers = rl.getRegisters();
 		//String day = LocalDate.now().toString();
@@ -369,21 +373,31 @@ public class ReportsUI extends Login {
 					File userPath = new File(s+ "\\Database\\" + regId + "\\" + day + "\\" + u.getName() +"\\" );
 							boolean userExists = userPath.exists();
 					if (userExists) {
-						userReport = userReport + "User ID: "+u.getUserId() + ", UserName: " + u.getName() + "\n";
+						double sale = 0;
+						double usertax = 0;
+						int amountSold = 0;
 						UserReceiptList user = w.ReadReceiptList(r.getRegId(), day, u.getName());
 						List<Receipt> userReceipts = user.getReceipts();
 						for (Receipt rcpt : userReceipts)
 						{
-							userReport = userReport + "Receipt ID: " + rcpt.getReceiptId() + ", Items Sold: " + rcpt.getSize() +", Total Sale: " + rcpt.getTotal() + "\n";
-						}						
+							amountSold += rcpt.getSize();
+							usertax += rcpt.getTax();
+							sale += rcpt.getTotal();
+						}	
+						userReport = userReport + "     User ID: "+u.getUserId() + ", UserName: " + u.getName() + ", Amount Sold: " + amountSold + ", Total Sale: " + sale + ", Tax: " + usertax+ "\n";
+						total += sale;
+						tax += tax;
 					}
 				}
 			}
 		}		
+		userReport = userReport +"Total Sales: "+total + ", Total Tax: " + tax;
 		reportArea.setText(userReport);
 	}
 	void printC(String regId, String day) throws Exception {
 		reportArea.setText("");
+		double total = 0;
+		double tax = 0;
 		WriteReadDatabase w = new WriteReadDatabase();
 		Login g = new Login();
 		UserList ul = w.ReadUserList();
@@ -397,23 +411,23 @@ public class ReportsUI extends Login {
 			File file = new File(s+ "\\Database\\" + regId + "\\");
 			boolean exists = file.exists();
 			if (exists) {
-				userReport = userReport + "Date: " + day + ", Register ID: " + regId + g.getuName()+"\n";
-				for (User u : users) {
-					File userPath = new File(s+ "\\Database\\" + regId + "\\" + day + "\\" + g.getuName() +"\\" );
+				userReport = userReport + "Date: " + day + ", Register ID: " + regId + ", User: " +user.getName()+"\n";
+					File userPath = new File(s+ "\\Database\\" + regId + "\\" + day + "\\" + user.getName() +"\\" );
 							boolean userExists = userPath.exists();
 					if (userExists) {
-						userReport = userReport + "User ID: "+u.getUserId() + ", UserName: " + u.getName() + "\n";
-						UserReceiptList user = w.ReadReceiptList(Integer.parseInt(regId), day, u.getName());
-						List<Receipt> userReceipts = user.getReceipts();
+						UserReceiptList userL = w.ReadReceiptList(Integer.parseInt(regId), day, user.getName());
+						List<Receipt> userReceipts = userL.getReceipts();
 						for (Receipt rcpt : userReceipts)
 						{
-							userReport = userReport + "Receipt ID: " + rcpt.getReceiptId() + ", Items Sold: " + rcpt.getSize() +", Total Sale: " + rcpt.getTotal() + "\n";
+							userReport = userReport + "     Receipt ID: " + rcpt.getReceiptId() + ", Items Sold: " + rcpt.getSize() +", Total Sale: $" + rcpt.getTotal() +  ", Total Tax: $" + rcpt.getTax() + "\n";
+							total += rcpt.getTotal();
+							tax += rcpt.getTax();
 						}
+						userReport = userReport + "Total Sales: $" + total + ", Total Tax: $" + tax + "\n";
 						
 						
 						
 					}
-				}
 			}
 
 			reportArea.setText(userReport);
@@ -557,6 +571,16 @@ public class ReportsUI extends Login {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	
+	public void setUser(User u) {
+		this.user = u;
+		
+	}
+	
+	public void setRegister(Register r) {
+		this.reg = r;
 	}
 	
 }
