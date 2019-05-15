@@ -112,7 +112,7 @@ public class MainGUI extends JFrame {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(176, 224, 230));
-		frame.setBounds(100, 100, 1020, 720);
+		frame.setBounds(100, 100, 1020, 740);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
@@ -126,6 +126,7 @@ public class MainGUI extends JFrame {
 		JButton btnCancelOrder = new JButton("Cancel Order");
 		btnCancelOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				calc.cancelSale();
 				homeWinReset();
 			};
 		});
@@ -370,8 +371,8 @@ public class MainGUI extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JButton btnMainMenu = new JButton("Main Menu");
-		menuBar.add(btnMainMenu);
+		//JButton btnMainMenu = new JButton("Main Menu");
+		//menuBar.add(btnMainMenu);
 		
 		JButton btnReports = new JButton("Reports");
 		btnReports.addActionListener(new ActionListener() {
@@ -386,8 +387,8 @@ public class MainGUI extends JFrame {
 		menuBar.add(btnReports);
 		
 		
-		JButton btnRegisters = new JButton("Registers");
-		menuBar.add(btnRegisters);
+		//JButton btnRegisters = new JButton("Registers");
+		//menuBar.add(btnRegisters);
 	}
 
 	public void setVisible(boolean visible) {
