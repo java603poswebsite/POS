@@ -3,7 +3,7 @@ import java.util.List;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class Calc {
+public class MainCalc {
 	private UserReceiptList allSales; 		// Local record of all sales.
 	private Receipt sale = null;			// A sale.
 	private User user;						// Local user object
@@ -14,7 +14,7 @@ public class Calc {
 	private final double taxRate = 0.075;
 	
 	// Constructor
-	public Calc(User u, Register r, JTextArea display) {
+	public MainCalc(User u, Register r, JTextArea display) {
 		allSales = new UserReceiptList();
 		user = u;
 		this.ReceiptDisplay = display;

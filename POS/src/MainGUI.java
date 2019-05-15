@@ -26,7 +26,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class HomeWin extends JFrame {
+public class MainGUI extends JFrame {
 
 	private JFrame frame;
 	private JTextField taxField;
@@ -40,7 +40,7 @@ public class HomeWin extends JFrame {
 	private Register register;
 	private WriteReadDatabase database = new WriteReadDatabase();
 	//private Receipt receipt = new Receipt(396432, 35); // placeholder until we get real credentials in here
-	private Calc calc = null;
+	private MainCalc calc = null;
 	private JPanel panel_1 = new JPanel();
 	
 	private double tax;
@@ -57,7 +57,7 @@ public class HomeWin extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HomeWin window = new HomeWin();
+					MainGUI window = new MainGUI();
 					window.frame.setVisible(true);
 					window.frame.setResizable(false);
 				} catch (Exception e) {
@@ -70,7 +70,7 @@ public class HomeWin extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public HomeWin() {
+	public MainGUI() {
 		initialize();
 		this.tax = 0.0;
 		this.subTotal = 0.0;
@@ -445,7 +445,7 @@ public class HomeWin extends JFrame {
 									try {
 										if (Integer.parseInt(amount.getText()) <= p.getInventory()) {
 											if (calc == null)
-												calc = new Calc(user, register, receiptBox);
+												calc = new MainCalc(user, register, receiptBox);
 										calc.startSale();
 										calc.addItem(p, Integer.parseInt(amount.getText()));
 										d.setVisible(false);
