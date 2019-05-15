@@ -1,7 +1,6 @@
 import java.util.List;
 
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 public class MainCalc {
 	private UserReceiptList allSales; 		// Local record of all sales.
@@ -38,6 +37,11 @@ public class MainCalc {
 		if(sale == null) {
 			sale = new Receipt(pos.getRegId(), user.getUserId(), taxRate);
 		}
+	}
+	
+	// Method for getting a sale
+	public Receipt getSale() {
+		return sale;
 	}
 	
 	// Method for adding individual items to a sale.

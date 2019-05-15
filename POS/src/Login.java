@@ -1,22 +1,22 @@
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextField;
-import java.awt.Font;
-import java.awt.HeadlessException;
-import java.awt.Color;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-
-import java.awt.event.ActionListener;
-import java.util.List;
-import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class Login  {
 
@@ -90,6 +90,7 @@ public class Login  {
 			textField = new JTextField();
 			RegisterList rl = dbService.ReadRegisterList();
 			List<Register> regList = rl.getRegisters();
+			reg = regList.get(0);
 			String stringRegisters[]= new String[regList.size()];  
 			Register[] registers = new Register[regList.size()];
 			int count = 0;
