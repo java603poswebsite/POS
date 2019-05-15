@@ -356,6 +356,8 @@ public class ReportsUI extends Login {
 		WriteReadDatabase w = new WriteReadDatabase();
 		UserList ul = w.ReadUserList();
 		List<User> users = ul.getUsers();
+		double total = 0;
+		double tax = 0;
 		RegisterList rl = w.ReadRegisterList();
 		List<Register> registers = rl.getRegisters();
 		//String day = LocalDate.now().toString();
@@ -371,17 +373,25 @@ public class ReportsUI extends Login {
 					File userPath = new File(s+ "\\Database\\" + regId + "\\" + day + "\\" + u.getName() +"\\" );
 							boolean userExists = userPath.exists();
 					if (userExists) {
-						userReport = userReport + "User ID: "+u.getUserId() + ", UserName: " + u.getName() + "\n";
+						double sale = 0;
+						double usertax = 0;
+						int amountSold = 0;
 						UserReceiptList user = w.ReadReceiptList(r.getRegId(), day, u.getName());
 						List<Receipt> userReceipts = user.getReceipts();
 						for (Receipt rcpt : userReceipts)
 						{
-							userReport = userReport + "Receipt ID: " + rcpt.getReceiptId() + ", Items Sold: " + rcpt.getSize() +", Total Sale: " + rcpt.getTotal() + "\n";
-						}						
+							amountSold += rcpt.getSize();
+							usertax += rcpt.getTax();
+							sale += rcpt.getTotal();
+						}	
+						userReport = userReport + "     User ID: "+u.getUserId() + ", UserName: " + u.getName() + ", Amount Sold: " + amountSold + ", Total Sale: " + sale + ", Tax: " + usertax+ "\n";
+						total += sale;
+						tax += tax;
 					}
 				}
 			}
 		}		
+		userReport = userReport +"Total Sales: "+total + ", Total Tax: " + tax;
 		reportArea.setText(userReport);
 	}
 	void printC(String regId, String day) throws Exception {
@@ -409,7 +419,7 @@ public class ReportsUI extends Login {
 						List<Receipt> userReceipts = userL.getReceipts();
 						for (Receipt rcpt : userReceipts)
 						{
-							userReport = userReport + "Receipt ID: " + rcpt.getReceiptId() + ", Items Sold: " + rcpt.getSize() +", Total Sale: $" + rcpt.getTotal() +  ", Total Tax: $" + rcpt.getTax() + "\n";
+							userReport = userReport + "     Receipt ID: " + rcpt.getReceiptId() + ", Items Sold: " + rcpt.getSize() +", Total Sale: $" + rcpt.getTotal() +  ", Total Tax: $" + rcpt.getTax() + "\n";
 							total += rcpt.getTotal();
 							tax += rcpt.getTax();
 						}
