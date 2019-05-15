@@ -41,7 +41,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 
-public class ReportsUI extends Gui {
+public class ReportsUI extends Login {
 
 	JFrame frame;
 	private JTextField txtSelectReportType;
@@ -382,9 +382,9 @@ public class ReportsUI extends Gui {
 		}		
 		reportArea.setText(userReport);
 	}
-	void printC(String regId, String day) throws Exception {
-		reportArea.setText("");
-		Gui g = new Gui();
+	void printC() throws Exception {
+		WriteReadDatabase w = new WriteReadDatabase();
+		Login g = new Login();
 		UserList ul = w.ReadUserList();
 		List<User> users = ul.getUsers();
 		RegisterList rl = w.ReadRegisterList();

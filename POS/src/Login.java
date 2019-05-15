@@ -18,7 +18,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
-public class Gui  {
+public class Login  {
 
 	private JFrame frame;
 	private JPasswordField passwordField;
@@ -34,7 +34,7 @@ public class Gui  {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Gui window = new Gui();
+					Login window = new Login();
 					window.frame.setResizable(false);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -45,7 +45,7 @@ public class Gui  {
 	}
 
 	
-	public Gui() {
+	public Login() {
 		initialize();
 	}
 
@@ -208,10 +208,10 @@ public class Gui  {
 			if (user != null) {
 				JOptionPane.showMessageDialog(frame, "you are sucessfully logged in");
 				
-					HomeWin home = new HomeWin ();
+					MainGUI home = new MainGUI ();
 					home.setUser(user);
 					home.setRegister(reg);
-					((HomeWin) home).setVisible(true);
+					((MainGUI) home).setVisible(true);
 					frame.dispose();
 			}
 			else if (reg == null) {

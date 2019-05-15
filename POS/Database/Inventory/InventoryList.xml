@@ -42,7 +42,7 @@
             <pIdent>222460</pIdent>
         </Product>
         <Product>
-            <Inventory>3</Inventory>
+            <Inventory>2</Inventory>
             <Name>Cat</Name>
             <Price>200.0</Price>
             <Supplier>Minnesota</Supplier>
