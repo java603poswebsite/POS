@@ -34,7 +34,7 @@
             <pIdent>429562</pIdent>
         </Product>
         <Product>
-            <Inventory>25</Inventory>
+            <Inventory>20</Inventory>
             <Name>Carrots</Name>
             <Price>5.0</Price>
             <Supplier>bugsbunny</Supplier>
