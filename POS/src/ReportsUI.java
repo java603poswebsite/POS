@@ -384,7 +384,7 @@ public class ReportsUI extends Login {
 							usertax += rcpt.getTax();
 							sale += rcpt.getTotal();
 						}	
-						userReport = userReport + "     User ID: "+u.getUserId() + ", UserName: " + u.getName() + ", Amount Sold: " + amountSold + ", Total Sale: " + sale + ", Tax: " + usertax+ "\n";
+						userReport = userReport + "     UserName: " + u.getName() + ", Amount Sold: " + amountSold + ", Total Sale: " + sale + ", Tax: " + usertax+ "\n";
 						total += sale;
 						tax += tax;
 					}
@@ -420,6 +420,11 @@ public class ReportsUI extends Login {
 						for (Receipt rcpt : userReceipts)
 						{
 							userReport = userReport + "     Receipt ID: " + rcpt.getReceiptId() + ", Items Sold: " + rcpt.getSize() +", Total Sale: $" + rcpt.getTotal() +  ", Total Tax: $" + rcpt.getTax() + "\n";
+							List<ReceiptItem> rcptItems = rcpt.getItems();
+							for (ReceiptItem item : rcptItems) {
+								userReport = userReport + "          " + item.getName() + " Amount: " + item.getAmount() + ", Price: " + item.getPrice() + "\n";
+								
+							}
 							total += rcpt.getTotal();
 							tax += rcpt.getTax();
 						}
