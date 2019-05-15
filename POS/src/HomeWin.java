@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -47,6 +48,7 @@ public class HomeWin extends JFrame {
 	private double total;
 	private double cashReceived;
 	private double cashChange;
+	private static DecimalFormat df = new DecimalFormat("0.00");
 	
 	/**
 	 * Launch the application.hello
@@ -159,7 +161,7 @@ public class HomeWin extends JFrame {
 				if(cashChange < 0.0) {
 					JOptionPane.showMessageDialog(frame, "Insufficient payment.");
 				}
-				totalChangeField.setText(Double.toString(cashChange));
+				totalChangeField.setText(df.format(cashChange));
 			};
 		});
 		
@@ -453,9 +455,9 @@ public class HomeWin extends JFrame {
 										subTotal += p.getPrice() * quantity;
 										total = tax + subTotal;
 						
-										taxField.setText(Double.toString(tax));
-										subtotalField.setText(Double.toString(subTotal));
-										totalField.setText(Double.toString(total));
+										taxField.setText(df.format(tax));
+										subtotalField.setText(df.format(subTotal));
+										totalField.setText(df.format(total));
 										}
 										else {
 											JOptionPane.showMessageDialog(frame, "Not Enough Inventory.");
